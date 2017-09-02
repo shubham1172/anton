@@ -10,3 +10,7 @@ def forbidden(e):
 @routes.errorhandler(405)
 def not_allowed(e):
     return jsonify(code = 405, message="not allowed")
+
+@routes.errorhandler(500)
+def server_error(e):
+    return jsonify(code = 500, message="server error")

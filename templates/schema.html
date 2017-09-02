@@ -1,6 +1,7 @@
 <html>
   <head>
     <title> Anton | {{ schema }}</title>
+    <link rel = "stylesheet" type = "text/css" href = {{ url_for('static',filename='css/styles.css') }}>
   </head>
   <body>
     <h3> Connection info: </h3>
@@ -9,8 +10,11 @@
     <b>Schemas</b>
     <table border="1">
       {% for table in tables %}
-      <tr><td>{{ table[0] }}</td></tr>
+      <tr><td><a href = {{ url_for('routes.table', schema=schema, table=table[0]) }}>{{ table[0] }}</a></td></tr>
       {% endfor %}
     </table>
+    <div class = "warning">
+      {{message}}
+    </div>
   </body>
 </html>

@@ -9,7 +9,7 @@
     <b>Schemas</b>
     <table border="1">
       {% for schema in schemas %}
-      <tr><td>{{ schema[0] }}</td></tr>
+      <tr><td><a href = {{ url_for('routes.schema', schema=schema[0]) }}>{{ schema[0] }}</a></td></tr>
       {% endfor %}
     </table>
   </body>
