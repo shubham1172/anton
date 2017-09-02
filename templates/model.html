@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title> Anton | {{ schema }}</title>
+    <title> Anton | Model</title>
   </head>
   <body>
     <h3> Connection info: </h3>
@@ -8,8 +8,8 @@
     port: {{ template["port"] }} </br></br>
     <b>Schemas</b>
     <table border="1">
-      {% for table in tables %}
-      <tr><td>{{ table[0] }}</td></tr>
+      {% for schema in schemas %}
+      <tr><td>{{ schema[0] }}</td></tr>
       {% endfor %}
     </table>
   </body>

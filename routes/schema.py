@@ -1,13 +1,11 @@
-from flask import jsonify, request, current_app, abort, render_template
-import psycopg2
+from flask import request, current_app, render_template
 from . import routes
 
-@routes.route('/schemas')
-def schemas():
+@routes.route('/model/<schema>')
+def schema(schema):
     connstring = current_app.config["connstring"].to_dict()
-    #Create a template dict
     connstring.pop("password")
     curr = current_app.config["conn"].cursor()
-    curr.execute('SELECT schema_name FROM information_schema.schemata')
+    curr.execute("SELECT table_name FROM information_schema.tables WHERE table_schema LIKE '{}'".format(schema))
     rows = curr.fetchall()
-    return render_template('schema.html', template=connstring, schemas=rows)
+    return render_template('schema.html', schema=schema, template=connstring, tables=rows)
