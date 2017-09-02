@@ -4,7 +4,13 @@
   </head>
   <body>
     <h3> Connection info: </h3>
-    host: {{ host }} </br>
-    port: {{ port }} </br>
+    host: {{ template["host"] }} </br>
+    port: {{ template["port"] }} </br></br>
+    <b>Schemas</b>
+    <table border="1">
+      {% for schema in schemas %}
+      <tr><td>{{ schema[0] }}</td></tr>
+      {% endfor %}
+    </table>
   </body>
 </html>
