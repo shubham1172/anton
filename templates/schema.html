@@ -1,20 +1,36 @@
-<html>
-  <head>
-    <title> Anton | {{ schema }}</title>
-    <link rel = "stylesheet" type = "text/css" href = {{ url_for('static',filename='css/styles.css') }}>
-  </head>
-  <body>
-    <h3> Connection info: </h3>
-    host: {{ template["host"] }} </br>
-    port: {{ template["port"] }} </br></br>
-    <b>Schemas</b>
-    <table border="1">
-      {% for table in tables %}
-      <tr><td><a href = {{ url_for('routes.table', schema=schema, table=table[0]) }}>{{ table[0] }}</a></td></tr>
-      {% endfor %}
-    </table>
-    <div class = "warning">
-      {{message}}
-    </div>
-  </body>
+<!---Schema--->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Anton | Schema</title>
+
+		<meta name="description" content="Schema">
+		<meta name="author" content="Anuja Negi">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href={{ url_for('static'), filename="css/schema.css" }} rel="stylesheet" />
+
+	</head>
+
+	<body>
+
+	<header>
+		Anton
+	</header>
+
+	<div class="schema">
+		<center><h3>Schemas</h3><br/>
+		<table cellspacing="5px">
+			  {% for schema in schemas %}
+			  <tr><td>{{ schema[0] }}</td></tr>
+			  {% endfor %}</center>
+		</table>
+	</div>
+
+	<footer>
+	Host: {{ template["host"] }} Port: {{ template["port"] }}
+	</footer>
+
+	</body>
 </html>
