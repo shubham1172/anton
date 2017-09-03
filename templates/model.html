@@ -3,14 +3,17 @@
     <title> Anton | Model</title>
   </head>
   <body>
-    <h3> Connection info: </h3>
-    host: {{ template["host"] }} </br>
-    port: {{ template["port"] }} </br></br>
-    <b>Schemas</b>
-    <table border="1">
-      {% for schema in schemas %}
-      <tr><td><a href = {{ url_for('routes.schema', schema=schema[0]) }}>{{ schema[0] }}</a></td></tr>
-      {% endfor %}
-    </table>
+    {% extends "base.html" %}
+    {% block content %}
+      <h3> Connection info: </h3>
+      host: {{ template["host"] }} </br>
+      port: {{ template["port"] }} </br></br>
+      <b>Schemas</b>
+      <table border="1">
+        {% for schema in schemas %}
+        <tr><td><a href = {{ url_for('routes.schema', schema=schema[0]) }}>{{ schema[0] }}</a></td></tr>
+        {% endfor %}
+      </table>
+    {% endblock %}
   </body>
 </html>

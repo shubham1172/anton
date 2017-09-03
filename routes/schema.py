@@ -3,8 +3,7 @@ from . import routes
 
 @routes.route('/model/<schema>')
 def schema(schema):
-    connstring = current_app.config["connstring"].to_dict()
-    connstring.pop("password")
+    connstring = current_app.config["connstring"]
     curr = current_app.config["conn"].cursor()
     try:
         curr.execute("SELECT table_name FROM information_schema.tables WHERE table_schema LIKE '{}'".format(schema))

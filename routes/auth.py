@@ -26,7 +26,10 @@ def login():
         abort(403);
     #Add objects to config file to be used later
     current_app.config["conn"] = conn
-    current_app.config["connstring"] = request.form
+    #Temporary dictionary to hold request info
+    conndict = request.form.to_dict()
+    conndict.pop("password")
+    current_app.config["connstring"] = conndict
     return redirect('/model')
 
 @routes.route('/logout')
