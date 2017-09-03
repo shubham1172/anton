@@ -7,6 +7,8 @@ def index():
     #If logged in, redirect to schemas
     if "conn" in current_app.config.keys():
         return redirect('/model')
+    if not current_app.config["first"]:
+        return current_app.send_static_file('index.html')
     return current_app.send_static_file('home.html')
 
 @routes.route('/login', methods=['POST'])
