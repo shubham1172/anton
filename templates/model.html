@@ -1,0 +1,33 @@
+<!---List of all Schemas--->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Anton | Schema</title>
+
+		<meta name="description" content="Schema">
+		<meta name="author" content="Anuja Negi">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href ="/static/css/model.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+
+		{% extends "base.html" %}
+		{% block content %}
+
+	<div class="schema">
+		<center><h3>Schemas</h3><br/>
+		<table cellspacing="5px">
+			  {% for schema in schemas %}
+			  <tr><td><a href = {{ url_for('routes.schema', schema=schema[0]) }}>{{ schema[0] }}</a></td></tr>
+			  {% endfor %}</center>
+		</table>
+	</div>
+
+	    {% endblock %}
+
+	</body>
+</html>

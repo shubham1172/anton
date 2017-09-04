@@ -1,4 +1,4 @@
-<!---Schema--->
+<!---Tables within each Schema--->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -9,28 +9,24 @@
 		<meta name="author" content="Anuja Negi">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href={{ url_for('static'), filename="css/schema.css" }} rel="stylesheet" />
+		<link href ="/static/css/schema.css" rel="stylesheet" />
 
 	</head>
 
-	<body>
-
-	<header>
-		Anton
-	</header>
-
-	<div class="schema">
-		<center><h3>Schemas</h3><br/>
-		<table cellspacing="5px">
-			  {% for schema in schemas %}
-			  <tr><td>{{ schema[0] }}</td></tr>
-			  {% endfor %}</center>
-		</table>
-	</div>
-
-	<footer>
-	Host: {{ template["host"] }} Port: {{ template["port"] }}
-	</footer>
-
-	</body>
+  <body>
+    {% extends "base.html" %}
+		{% block content %}
+    <div class="tables">
+      <center><h3>Tables</h3><br/>
+      <table cellspacing="5px">
+        {% for table in tables %}
+        <tr><td><a href = {{ url_for('routes.table', schema=schema, table=table[0]) }}>{{ table[0] }}</a></td></tr>
+        {% endfor %}
+      </table>
+      <div class = "warning">
+        {{message}}
+      </div>
+    </div>
+    {% endblock %}
+  </body>
 </html>
