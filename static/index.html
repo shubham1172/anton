@@ -11,16 +11,38 @@
 		<meta http-equiv="refresh" content="60">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href= {{ url_for('static'), filename="css/index.css" }} rel="stylesheet" />
+		<link href= "/static/css/index.css" rel="stylesheet" />
 
 	</head>
 
 	<body>
-		<div class="head">
-		Anton says hi :)<br/>
-		<form method="get" action={{ url_for('static'), filename='home.html' }}>
-			<button id="submit" >Get Started!</button>
-		</form>
-		</div>
+		<header>
+			Anton
+	  </header>
+		<table cellspacing="10px">
+      <form name="login" action="/login" method="post">
+        <tr>
+          <td>Host: </td>
+          <td><input type="text" name="host" value="127.0.0.1"></td>
+        </tr>
+        <tr>
+          <td>Port: </td>
+          <td><input type="text" name="port" value="5432"></td>
+        </tr>
+        <tr>
+          <td>Username: </td>
+          <td><input type="text" name="username" placeholder="postgres"></td>
+        </tr>
+        <tr>
+          <td>Password: </td>
+          <td><input type="password" name="password" placeholder="password"></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input id="login" type="submit" value="Login">
+           </td>
+        </tr>
+      </form>
+    </table>
 	</body>
 </html>

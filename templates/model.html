@@ -1,17 +1,16 @@
 {% extends "base.html" %}
-{% block title %}{{schema}}{% endblock %}
+{% block title %}Model{% endblock %}
 {% block head %}
 	{{ super() }}
 	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
-<div class="tables">
+<div class="schemas">
 	<center>
-		<h3>Tables | {{schema}}</h3><br/>
-    {{message}}
+		<h3>Schemas</h3><br/>
 		<table cellspacing="5px">
-				{% for table in tables %}
-				<tr><td><a href = "{{ url_for('routes.table', schema = schema, table = table[0])}}">{{ table[0] }}</a></td></tr>
+				{% for schema in schemas %}
+				<tr><td><a href = "{{ url_for('routes.schema', schema = schema[0])}}">{{ schema[0] }}</a></td></tr>
 				{% endfor %}
 		</table>
 	</center>

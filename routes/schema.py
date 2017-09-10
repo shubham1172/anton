@@ -5,6 +5,7 @@ from . import routes
 def schema(schema):
     connstring = current_app.config["connstring"]
     curr = current_app.config["conn"].cursor()
+    print(schema)
     try:
         curr.execute("SELECT table_name FROM information_schema.tables WHERE table_schema LIKE '{}'".format(schema))
     except:

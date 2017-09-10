@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
-		
+
 body {
 		height: 100%;
 		margin: 0;
@@ -9,8 +9,13 @@ body {
 		background-color:#eeeeee;
 		font-family: 'PT Sans', sans-serif;
 		font-size: 18px;
+    min-height: 100%;
 	}
-	
+
+a{
+  text-decoration: underline;
+  color: inherit;
+}
 
 header {
 		background-color: #546e7a;
@@ -20,23 +25,8 @@ header {
 	}
 
 footer {
-		white-space: pre;
-	    position: absolute;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		padding-right: 1rem;
-		text-align: right;
+  position: relative;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: right;
 }
-	 }
-
-table {
-	width: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-	 
-.schema{
-		align= center;
-		font-size: 22px;
-	 }

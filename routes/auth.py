@@ -7,9 +7,7 @@ def index():
     #If logged in, redirect to schemas
     if "conn" in current_app.config.keys():
         return redirect('/model')
-    if not current_app.config["first"]:
-        return current_app.send_static_file('index.html')
-    return current_app.send_static_file('home.html')
+    return current_app.send_static_file('index.html')
 
 @routes.route('/login', methods=['POST'])
 def login():
@@ -40,6 +38,6 @@ def logout():
     if "conn" in current_app.config.keys():
         current_app.config.pop("conn")
         current_app.config.pop("connstring")
-        return jsonify(message="Logged out!")
+        return redirect('/')
     else:
         abort(405);
