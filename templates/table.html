@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{table}}|{{schema}}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<link href= "{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+<div class="columns">
+	<center>
+		<h3><a href = "{{ url_for('routes.schema', schema=schema)}}">{{schema}}</a> | {{table}}</h3><br/>
+    {{message}}
+		<table cellspacing="5px">
+      <tr>
+        <td><b>Column</b></td>
+        <td><b>Data Type</b></td>
+      </tr>
+			{% for column in columns %}
+			<tr>
+        <td>{{ column[0] }}</td>
+        <td>{{ column[1] }}</td>
+      </tr>
+			{% endfor %}
+		</table>
+	</center>
+</div>
+{% endblock %}
