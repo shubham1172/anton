@@ -3,7 +3,7 @@ from flask import Flask
 from routes import *
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object('config') #load config
 app.register_blueprint(routes, urlprefix='')
 
 #Start app
