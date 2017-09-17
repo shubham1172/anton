@@ -1,0 +1,30 @@
+.schemas{
+	font-size: 22px;
+ }
+
+ a{
+	 text-decoration: none;
+ }
+
+ .vertical-menu {
+    float: left;
+    width: 200px;
+		display: inline-block;
+}
+
+.vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc;
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+}

@@ -2,11 +2,14 @@
 {% block title %}{{table}}|{{schema}}{% endblock %}
 {% block head %}
 	{{ super() }}
-	<link href= "{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+<div class="vertical-menu">
+	 <a href="#">Alter table</a>
+</div>
+
 <div class="columns">
-	<center>
 		<h3><a href = "{{ url_for('routes.schema', schema=schema)}}">{{schema}}</a> | {{table}}</h3><br/>
     {{message}}
 		<table cellspacing="5px">
@@ -21,6 +24,5 @@
       </tr>
 			{% endfor %}
 		</table>
-	</center>
 </div>
 {% endblock %}

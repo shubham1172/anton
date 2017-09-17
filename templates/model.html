@@ -2,17 +2,23 @@
 {% block title %}Model{% endblock %}
 {% block head %}
 	{{ super() }}
-	<link href= "{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+
+<div class="vertical-menu">
+	 <a href="#">Add schema</a>
+	 <a href="#">Delete schema</a>
+</div>
+
 <div class="schemas">
-	<center>
 		<h3>Schemas</h3><br/>
 		<table cellspacing="5px">
 				{% for schema in schemas %}
 				<tr><td><a href = "{{ url_for('routes.schema', schema = schema[0])}}">{{ schema[0] }}</a></td></tr>
 				{% endfor %}
 		</table>
-	</center>
 </div>
+
+
 {% endblock %}
