@@ -36,7 +36,8 @@ header a{
 }
 
 footer {
-  position: absolute;;
+	position: fixed;
+	text-align: right;
 	bottom: 0;
 	right: 0;
   padding: 1rem;

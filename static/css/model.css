@@ -1,3 +1,4 @@
+
 .schemas{
 	font-size: 22px;
  }
@@ -10,6 +11,7 @@
     float: left;
     width: 200px;
 		display: inline-block;
+		height: 100%;
 }
 
 .vertical-menu a {
