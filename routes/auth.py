@@ -21,6 +21,7 @@ def login():
     try:
         #Try to connect
         conn = psycopg2.connect(connstring)
+        conn.set_session(autocommit=True)
     except:
         #Cannot connect
         abort(403);

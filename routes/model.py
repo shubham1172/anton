@@ -1,4 +1,4 @@
-from flask import request, current_app, render_template
+from flask import request, current_app, render_template, abort
 from . import routes
 
 #Get all schemas in the database
@@ -10,7 +10,8 @@ def model():
                 FROM information_schema.schemata"""
     try:
         curr.execute(query)
-    except:
+    except Exception as e:
+        print(e)
         abort(500)
     rows = curr.fetchall()
     return render_template('model.html', template=connstring, schemas=rows)

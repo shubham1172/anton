@@ -1,4 +1,4 @@
-from flask import request, current_app, render_template, abort
+from flask import current_app, render_template, abort
 from . import routes
 
 @routes.route('/model/<schema>')
@@ -19,3 +19,7 @@ def schema(schema):
         message = "No tables found. Schema name invalid/Schema is empty"
     return render_template('schema.html', message=message,
         schema=schema, template=connstring, tables=rows)
+
+@routes.route('/model/add-schema')
+def add_schema():
+    return render_template('schema_add.html', template=current_app.config["connstring"])
