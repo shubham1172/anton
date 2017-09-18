@@ -1,14 +1,12 @@
 #API blueprint init file
-from flask import Blueprint, current_app
+from flask import Blueprint, current_app, session
 
 api = Blueprint('api', __name__)
 
 #Connection data
 @api.before_request
 def before_request():
-    if routes_conn():
-        current_app.config["conn"] = routes_conn()
-    else:
+    if "user-token" not in session:
         return sender.Forbidden("Login to use the API")
 
 #Import routes

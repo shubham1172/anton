@@ -1,18 +1,8 @@
 # We are schema experts
-from flask import current_app, request
+from flask import current_app, request, session
 from . import api
 from . import sender
-
-@api.route('/test')
-def test():
-    curr = current_app.config["conn"].cursor()
-    query = """SELECT * FROM public.test"""
-    try:
-        curr.execute(query)
-        rows = curr.fetchall()
-        return sender.OK(rows)
-    except Exception as e:
-        return sender.Error(e)
+from app import getConnection
 
 """
 Creates a schema
@@ -24,7 +14,7 @@ def create_schema():
     name = request.form["name"]
     if not name:
         return sender.BadRequest("missing field: name")
-    curr = current_app.config["conn"].cursor()
+    curr = getConnection(session["user-token"])[0].cursor()
     query = "CREATE SCHEMA \"{}\";".format(name)
     try:
         curr.execute(query)
@@ -45,7 +35,7 @@ def drop_schema():
     not_allowed = ["pg_toast", "pg_catalog","public","information_schema"]
     if name in not_allowed:
         return sender.Forbidden("Not allowed")
-    curr = current_app.config["conn"].cursor()
+    curr = getConnection(session["user-token"])[0].cursor()
     query = "DROP SCHEMA \"{}\";".format(name)
     try:
         curr.execute(query)
