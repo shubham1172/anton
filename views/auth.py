@@ -37,6 +37,7 @@ def login():
 def logout():
     #Check if logged in
     if "conn" in current_app.config.keys():
+        current_app.config["conn"].close()
         current_app.config.pop("conn")
         current_app.config.pop("connstring")
         return redirect('/')
