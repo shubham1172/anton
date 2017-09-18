@@ -1,11 +1,11 @@
 #Main app file
 from flask import Flask
-from routes import *
+from views import *
 from api import *
 
 app = Flask(__name__)
 app.config.from_object('config') #load config
-app.register_blueprint(routes, url_prefix='')
+app.register_blueprint(views, url_prefix='')
 app.register_blueprint(api, url_prefix='/api')
 
 #Start app

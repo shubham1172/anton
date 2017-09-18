@@ -1,6 +1,6 @@
 #API blueprint init file
 from flask import Blueprint, current_app
-from routes import connection as routes_conn
+from views import connection as routes_conn
 
 api = Blueprint('api', __name__)
 

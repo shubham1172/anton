@@ -15,7 +15,7 @@
 		<h3>Schemas</h3><br/>
 		<table cellspacing="5px">
 				{% for schema in schemas %}
-				<tr><td><input type="checkbox" name="schema"><a href = "{{ url_for('routes.schema', schema = schema[0])}}">{{ schema[0] }}</a></input></td></tr>
+				<tr><td><input type="checkbox" name="schema"><a href = "{{ url_for('views.schema', schema = schema[0])}}">{{ schema[0] }}</a></input></td></tr>
 				{% endfor %}
 		</table>
 </div>

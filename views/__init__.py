@@ -1,11 +1,11 @@
-#Routes blueprint init file
+#Views blueprint init file
 from flask import Blueprint, request, current_app
-routes = Blueprint('routes', __name__, static_folder='static')
+views = Blueprint('views', __name__, static_folder='static')
 #Allowed URLs
-allowed = ['routes.index', 'routes.login', 'routes.logout']
+allowed = ['views.index', 'views.login', 'views.logout']
 
 #Conditional routing as per session
-@routes.before_request
+@views.before_request
 def before_request():
     if request.endpoint not in allowed and "conn" not in current_app.config.keys():
         return redirect('/')

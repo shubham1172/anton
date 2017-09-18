@@ -1,7 +1,7 @@
 from flask import request, current_app, render_template, abort
-from . import routes
+from . import views
 
-@routes.route('/model/<schema>/<table>')
+@views.route('/model/<schema>/<table>')
 def table(schema,table):
     connstring = current_app.config["connstring"]
     curr = current_app.config["conn"].cursor()

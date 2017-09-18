@@ -9,8 +9,8 @@
   </head>
   <body>
     <header>
-      <a href="{{ url_for('routes.index') }}">Anton</a>
-      <p><a href = "{{ url_for('routes.logout')}}">Logout</a></p>
+      <a href="{{ url_for('views.model') }}">Anton</a>
+      <p><a href = "{{ url_for('views.logout')}}">Logout</a></p>
     </header>
     <div class="content">
       {% block content %}{% endblock %}

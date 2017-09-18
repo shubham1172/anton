@@ -1,7 +1,7 @@
 from flask import current_app, render_template, abort
-from . import routes
+from . import views
 
-@routes.route('/model/<schema>')
+@views.route('/model/<schema>')
 def schema(schema):
     connstring = current_app.config["connstring"]
     curr = current_app.config["conn"].cursor()
@@ -20,6 +20,6 @@ def schema(schema):
     return render_template('schema.html', message=message,
         schema=schema, template=connstring, tables=rows)
 
-@routes.route('/model/add-schema')
+@views.route('/model/add-schema')
 def add_schema():
     return render_template('schema_add.html', template=current_app.config["connstring"])

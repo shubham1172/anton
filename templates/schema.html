@@ -17,7 +17,7 @@
     {{message}}
 		<table cellspacing="5px">
 				{% for table in tables %}
-				<tr><td><input type="checkbox" name="table"><a href = "{{ url_for('routes.table', schema = schema, table = table[0])}}">{{ table[0] }}</a></input></td></tr>
+				<tr><td><input type="checkbox" name="table"><a href = "{{ url_for('views.table', schema = schema, table = table[0])}}">{{ table[0] }}</a></input></td></tr>
 				{% endfor %}
 		</table>
 </div>

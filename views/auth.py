@@ -1,15 +1,15 @@
 from flask import jsonify, request, current_app, abort, redirect
 import psycopg2
-from . import routes
+from . import views
 
-@routes.route('/')
+@views.route('/')
 def index():
     #If logged in, redirect to schemas
     if "conn" in current_app.config.keys():
         return redirect('/model')
     return current_app.send_static_file('index.html')
 
-@routes.route('/login', methods=['POST'])
+@views.route('/login', methods=['POST'])
 def login():
     #Collect form data
     username = request.form["username"]
@@ -33,7 +33,7 @@ def login():
     current_app.config["connstring"] = conndict
     return redirect('/model')
 
-@routes.route('/logout')
+@views.route('/logout')
 def logout():
     #Check if logged in
     if "conn" in current_app.config.keys():

@@ -1,8 +1,8 @@
 from flask import request, current_app, render_template, abort
-from . import routes
+from . import views
 
 #Get all schemas in the database
-@routes.route('/model')
+@views.route('/model')
 def model():
     connstring = current_app.config["connstring"]
     curr = current_app.config["conn"].cursor()
