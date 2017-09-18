@@ -1,10 +1,11 @@
-from flask import request, current_app, render_template, abort
+from flask import request, render_template, abort, session
 from . import views
+from app import setConnection, getConnection, closeConnection
 
 @views.route('/model/<schema>/<table>')
 def table(schema,table):
-    connstring = current_app.config["connstring"]
-    curr = current_app.config["conn"].cursor()
+    conn, connstring = getConnection(session["user-token"])
+    curr = conn.cursor()
     query = """SELECT column_name, data_type
                 FROM information_schema.columns
                 WHERE table_name LIKE '{}'

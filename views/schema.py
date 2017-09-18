@@ -1,10 +1,11 @@
-from flask import current_app, render_template, abort
+from flask import render_template, abort, session
 from . import views
+from app import getConnection
 
 @views.route('/model/<schema>')
 def schema(schema):
-    connstring = current_app.config["connstring"]
-    curr = current_app.config["conn"].cursor()
+    conn, connstring = getConnection(session["user-token"])
+    curr = conn.cursor()
     query = """SELECT table_name
                 FROM information_schema.tables
                 WHERE table_schema
@@ -22,4 +23,4 @@ def schema(schema):
 
 @views.route('/model/add-schema')
 def add_schema():
-    return render_template('schema_add.html', template=current_app.config["connstring"])
+    return render_template('schema_add.html', template=getConnection(session["user-token"])[1])

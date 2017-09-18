@@ -1,11 +1,12 @@
-from flask import request, current_app, render_template, abort
+from flask import request, render_template, abort, session
+from app import getConnection
 from . import views
 
 #Get all schemas in the database
 @views.route('/model')
 def model():
-    connstring = current_app.config["connstring"]
-    curr = current_app.config["conn"].cursor()
+    conn, connstring = getConnection(session["user-token"])
+    curr = conn.cursor()
     query = """SELECT schema_name
                 FROM information_schema.schemata"""
     try:

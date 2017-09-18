@@ -1,11 +1,12 @@
-from flask import jsonify, request, current_app, abort, redirect
+from flask import jsonify, request, abort, redirect, current_app, session
 import psycopg2
 from . import views
+from app import setConnection, getConnection, closeConnection
 
 @views.route('/')
 def index():
-    #If logged in, redirect to schemas
-    if "conn" in current_app.config.keys():
+    #If logged in, redirect to model
+    if "user-token" in session:
         return redirect('/model')
     return current_app.send_static_file('index.html')
 
@@ -25,21 +26,19 @@ def login():
     except:
         #Cannot connect
         abort(403);
-    #Add objects to config file to be used later
-    current_app.config["conn"] = conn
     #Temporary dictionary to hold request info
     conndict = request.form.to_dict()
     conndict.pop("password")
-    current_app.config["connstring"] = conndict
+    #Add object to session
+    session["user-token"] = setConnection([conn, conndict])
     return redirect('/model')
 
 @views.route('/logout')
 def logout():
     #Check if logged in
-    if "conn" in current_app.config.keys():
-        current_app.config["conn"].close()
-        current_app.config.pop("conn")
-        current_app.config.pop("connstring")
+    if "user-token" in session:
+        closeConnection(session["user-token"])
+        session.pop("user-token")
         return redirect('/')
     else:
         abort(405);
