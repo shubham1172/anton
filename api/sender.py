@@ -4,7 +4,7 @@ from flask import jsonify
 def OK(data):
     return jsonify(code=200, data=data)
 
-def BadRequest(message):
+def BadRequest(message="incorrect parameters"):
     return jsonify(code=400, message=message)
 
 def Forbidden(message):
