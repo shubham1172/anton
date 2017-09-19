@@ -65,3 +65,22 @@ def rename_schema():
         return sender.OK("Schema {} successfully renamed to {}!".format(name, new_name))
     except Exception as e:
         return sender.Error(str(e))
+
+"""
+Get tables in a schema
+Requires:
+Schema name -> schema
+"""
+@api.route('/get-tables') #/get-tables?schema=schemaname
+def get_tables():
+    schema = request.args.get('schema')
+    if not schema:
+        return sender.BadRequest("Missing parameter: schema")
+    curr = getConnection(session["user-token"])[0].cursor()
+    query = """SELECT table_name FROM information_schema.tables
+                WHERE table_schema = '{}'""".format(schema)
+    try:
+        curr.execute(query)
+        return sender.OK(curr.fetchall())
+    except Exception as e:
+        return sender.Error(str(e))
