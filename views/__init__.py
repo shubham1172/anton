@@ -17,4 +17,3 @@ from .auth import *
 from .model import *
 from .schema import *
 from .table import *
-from app import getConnection

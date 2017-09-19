@@ -1,7 +1,7 @@
 from flask import jsonify, request, abort, redirect, current_app, session
 import psycopg2
 from . import views
-from app import setConnection, getConnection, closeConnection
+from connections import setConnection, getConnection, closeConnection
 
 @views.route('/')
 def index():

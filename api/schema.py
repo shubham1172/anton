@@ -2,8 +2,17 @@
 from flask import current_app, request, session
 from . import api
 from . import sender
-from app import getConnection
+from connections import getConnection
 
+@api.route('/test')
+def test():
+    curr = getConnection(session["user-token"])[0].cursor()
+    query = "SELECT * FROM public.test"
+    try:
+        curr.execute(query)
+        return sender.OK(curr.fetchall())
+    except Exception as e:
+        return sender.Error(str(e))
 """
 Creates a schema
 Requires:
