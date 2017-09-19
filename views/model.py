@@ -1,5 +1,5 @@
 from flask import request, render_template, abort, session
-from app import getConnection
+from connections import getConnection
 from . import views
 
 #Get all schemas in the database

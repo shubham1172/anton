@@ -1,6 +1,6 @@
 from flask import render_template, abort, session
 from . import views
-from app import getConnection
+from connections import getConnection
 
 @views.route('/model/<schema>')
 def schema(schema):
