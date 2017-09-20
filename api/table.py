@@ -8,6 +8,7 @@ from connections import getConnection
 Get table info
 Requires:
 Table name -> table
+Schema name -> schema (default is public)
 Returns:
     {
         schema: schemaname,
@@ -22,11 +23,14 @@ Returns:
         ]
     }
 """
-@api.route('/get-table-info') #/get-table-info?table=tablename
+@api.route('/get-table-info') #/get-table-info?table=tablename&schema=schemaname
 def get_table_info():
     table = request.args.get('table')
+    schema = request.args.get('schema')
     if not table:
         return sender.BadRequest("missing field: table")
+    if not schema:
+        schema = "public"
     data = {}
     curr = getConnection(session["user-token"])[0].cursor()
     query = """SELECT
@@ -37,20 +41,23 @@ def get_table_info():
                 column_default,
                 is_nullable
                     FROM information_schema.columns
-                    WHERE table_name = '{}';""".format(table)
+                    WHERE table_name = '{}' AND table_schema = '{}';""".format(table, schema)
     try:
         curr.execute(query)
         rows = curr.fetchall()
-        data["schema"] = rows[0][0]
-        data["table"] = rows[0][1]
-        data["columns"] = []
-        for row in rows:
-            data["columns"].append({
-                "name": row[2],
-                "type": row[3],
-                "default": row[4],
-                "nullable": row[5]
-            })
+        if len(rows) == 0:
+            data["message"] = "Table doesn't exists or is empty"
+        else:
+            data["schema"] = rows[0][0]
+            data["table"] = rows[0][1]
+            data["columns"] = []
+            for row in rows:
+                data["columns"].append({
+                    "name": row[2],
+                    "type": row[3],
+                    "default": row[4],
+                    "nullable": row[5]
+                })
         return sender.OK(data)
     except Exception as e:
         return sender.Error(str(e))
@@ -59,24 +66,31 @@ def get_table_info():
 Get table data
 Requires:
 Table name -> table
+Schema name -> schema (default is public)
 Returns:
 
 """
-@api.route('/get-table-data') #/get-table-data?table=tablename
+@api.route('/get-table-data') #/get-table-data?table=tablename&schema=schemaname
 def get_table_data():
     table = request.args.get("table")
+    schema = request.args.get("schema")
     if not table:
         return sender.BadRequest("missing field: table")
+    if not schema:
+        schema = "public"
     curr = getConnection(session["user-token"])[0].cursor()
     query = """SELECT *
-                FROM {}
-                LIMIT 20""".format(table)
+                FROM {}.{}
+                LIMIT 20""".format(schema,table)
     try:
         curr.execute(query)
         rows = curr.fetchall()
         data = {}
-        data["headers"] = [desc[0] for desc in curr.description]
-        data["values"] = rows
+        if len(rows) == 0:
+            data["message"] = "Table doesn't exists or is empty"
+        else:
+            data["headers"] = [desc[0] for desc in curr.description]
+            data["values"] = rows
         return sender.OK(data)
     except Exception as e:
         return sender.Error(str(e))
