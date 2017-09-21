@@ -25,12 +25,12 @@ Returns:
 """
 @api.route('/get-table-info') #/get-table-info?table=tablename&schema=schemaname
 def get_table_info():
-    table = request.args.get('table')
-    schema = request.args.get('schema')
-    if not table:
+    tablename = request.args.get('table')
+    schemaname = request.args.get('schema')
+    if not tablename:
         return sender.BadRequest("missing field: table")
-    if not schema:
-        schema = "public"
+    if not schemaname:
+        schemaname = "public"
     data = {}
     curr = getConnection(session["user-token"])[0].cursor()
     query = """SELECT
@@ -41,7 +41,7 @@ def get_table_info():
                 column_default,
                 is_nullable
                     FROM information_schema.columns
-                    WHERE table_name = '{}' AND table_schema = '{}';""".format(table, schema)
+                    WHERE table_name = '{}' AND table_schema = '{}';""".format(tablename, schemaname)
     try:
         curr.execute(query)
         rows = curr.fetchall()
@@ -72,16 +72,16 @@ Returns:
 """
 @api.route('/get-table-data') #/get-table-data?table=tablename&schema=schemaname
 def get_table_data():
-    table = request.args.get("table")
-    schema = request.args.get("schema")
-    if not table:
+    tablename = request.args.get("table")
+    schemaname = request.args.get("schema")
+    if not tablename:
         return sender.BadRequest("missing field: table")
-    if not schema:
-        schema = "public"
+    if not schemaname:
+        schemaname = "public"
     curr = getConnection(session["user-token"])[0].cursor()
     query = """SELECT *
                 FROM {}.{}
-                LIMIT 20""".format(schema,table)
+                LIMIT 20""".format(schemaname,tablename)
     try:
         curr.execute(query)
         rows = curr.fetchall()

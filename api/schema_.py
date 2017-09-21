@@ -1,5 +1,5 @@
 # We are schema experts
-from flask import request, session
+from flask import request, session, jsonify
 from . import api
 from . import sender
 from connections import getConnection

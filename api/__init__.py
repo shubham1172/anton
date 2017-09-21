@@ -10,6 +10,6 @@ def before_request():
         return sender.Forbidden("Login to use the API")
 
 #Import routes
-from .schema import *
 from .sender import *
 from .table import *
+from .schema_ import *
