@@ -13,6 +13,13 @@ app.register_blueprint(api, url_prefix='/api')
 def before_first_request():
     session.clear()
 
+@app.route('/site-map')
+def site_map():
+    routes = []
+    for rule in app.url_map.iter_rules():
+        routes.append(rule)
+    return str(routes)
+
 #Start app
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)

@@ -11,5 +11,5 @@ def before_request():
 
 #Import routes
 from .sender import *
-from .table import *
-from .schema_ import *
+from .table_features import *
+from .schema_features import *
