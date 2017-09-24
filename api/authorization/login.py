@@ -23,4 +23,4 @@ def login():
     conndict.pop("password")
     #Add object to session
     session["user-token"] = setConnection([conn, conndict])
-    return sender.OK("Logged in")
+    return sender.OK("Logged in", session["user-token"])

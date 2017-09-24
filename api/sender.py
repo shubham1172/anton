@@ -1,7 +1,9 @@
 # Handles returning of data in a standard format
 from flask import jsonify
 
-def OK(data):
+def OK(data, args = None):
+    if args:
+        return jsonify(code=200, data=data, args=args)
     return jsonify(code=200, data=data)
 
 def BadRequest(message="incorrect parameters"):

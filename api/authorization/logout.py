@@ -10,4 +10,4 @@ def logout():
         session.pop("user-token")
         return sender.OK("Logged out!")
     else:
-        return sender.OK("Login first!")
+        return sender.Forbidden("Login first!")

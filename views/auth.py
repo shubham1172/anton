@@ -1,4 +1,5 @@
-from flask import jsonify, request, abort, redirect, current_app, session
+from flask import jsonify, request, abort, redirect, current_app, session, url_for, json
+import requests
 import psycopg2
 from . import views
 from connections import setConnection, getConnection, closeConnection
@@ -12,33 +13,28 @@ def index():
 
 @views.route('/login', methods=['POST'])
 def login():
-    #Collect form data
-    username = request.form["username"]
-    password = request.form["password"]
-    host = request.form["host"]
-    port = request.form["port"]
-    #Create a connstring
-    connstring = "dbname='postgres' user='{}' host='{}' password='{}' port={}".format(username, host, password, port)
+    #API URL
+    url = request.url_root + url_for('api.login')[1:]
     try:
-        #Try to connect
-        conn = psycopg2.connect(connstring)
-        conn.set_session(autocommit=True)
-    except:
-        #Cannot connect
-        abort(403);
-    #Temporary dictionary to hold request info
-    conndict = request.form.to_dict()
-    conndict.pop("password")
-    #Add object to session
-    session["user-token"] = setConnection([conn, conndict])
-    return redirect('/model')
+        data = json.loads(json.dumps(request.form))
+        r = requests.post(url, json = data)
+        res = r.json()
+        if res["code"] == 200:
+            #Set session for this blueprint
+            session["user-token"] = res["args"]
+            return redirect('/model')
+        else:
+            return redirect('/')
+    except Exception as e:
+        return str(e)
 
 @views.route('/logout')
 def logout():
-    #Check if logged in
-    if "user-token" in session:
-        closeConnection(session["user-token"])
-        session.pop("user-token")
+    #API URL
+    url = request.url_root + url_for('api.logout')[1:]
+    try:
+        r = requests.post(url)
+        session.pop("user-token") #anyway have to remove it
         return redirect('/')
-    else:
-        abort(405);
+    except Exception as e:
+        return str(e)

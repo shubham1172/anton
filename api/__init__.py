@@ -1,5 +1,5 @@
 #API blueprint init file
-from flask import Blueprint, current_app, session, request
+from flask import Blueprint, current_app, request, json
 
 api = Blueprint('api', __name__)
 """
