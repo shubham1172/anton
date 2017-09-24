@@ -9,7 +9,7 @@ Schema name -> schema
 """
 @api.route('/get-tables', methods=["POST"])
 def get_tables():
-    schema = request.json['schema']
+    schema = request.json.get('schema', None)
     if not schema:
         return sender.BadRequest("Missing parameter: schema")
     curr = getConnection(session["user-token"])[0].cursor()

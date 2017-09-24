@@ -24,8 +24,8 @@ Returns:
 """
 @api.route('/get-table-info', methods=['POST'])
 def get_table_info():
-    tablename = request.json['table']
-    schemaname = request.json['schema']
+    tablename = request.json.get('table', None)
+    schemaname = request.json.get('schema', None)
     if not tablename:
         return sender.BadRequest("missing field: table")
     if not schemaname:

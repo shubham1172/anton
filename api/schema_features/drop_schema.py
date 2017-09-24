@@ -9,7 +9,7 @@ Schema name -> schema
 """
 @api.route('/drop-schema', methods=['POST'])
 def drop_schema():
-    name = request.json['schema']
+    name = request.json.get('schema', None)
     if not name:
         return sender.BadRequest("missing field: name")
     not_allowed = ["pg_toast", "pg_catalog","public","information_schema"]

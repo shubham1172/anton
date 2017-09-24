@@ -9,7 +9,7 @@ Schema name -> schema
 """
 @api.route('/create-schema', methods=["POST"])
 def create_schema():
-    name =  request.json['schema']
+    name =  request.json.get('schema', None)
     if not name:
         return sender.BadRequest("missing field: schema")
     curr = getConnection(session["user-token"])[0].cursor()
