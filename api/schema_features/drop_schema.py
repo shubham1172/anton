@@ -1,15 +1,15 @@
-from flask import request, session, jsonify
+from flask import request, session
 from api import api, sender
 from connections import getConnection
 
 """
 Drops a schema
 Requires:
-Schema name -> name
+Schema name -> schema
 """
-@api.route('/drop-schema') #/drop-schema?name=schemaname
+@api.route('/drop-schema', methods=['POST'])
 def drop_schema():
-    name = request.args.get('name')
+    name = request.json['schema']
     if not name:
         return sender.BadRequest("missing field: name")
     not_allowed = ["pg_toast", "pg_catalog","public","information_schema"]

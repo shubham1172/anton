@@ -11,10 +11,10 @@ Schema name -> schema (default is public)
 Returns:
 
 """
-@api.route('/get-table-data') #/get-table-data?table=tablename&schema=schemaname
+@api.route('/get-table-data', methods=['POST'])
 def get_table_data():
-    tablename = request.args.get("table")
-    schemaname = request.args.get("schema")
+    tablename = request.json["table"]
+    schemaname = request.json["schema"]
     if not tablename:
         return sender.BadRequest("missing field: table")
     if not schemaname:

@@ -7,9 +7,9 @@ Get tables in a schema
 Requires:
 Schema name -> schema
 """
-@api.route('/get-tables') #/get-tables?schema=schemaname
+@api.route('/get-tables', methods=["POST"])
 def get_tables():
-    schema = request.args.get('schema')
+    schema = request.json['schema']
     if not schema:
         return sender.BadRequest("Missing parameter: schema")
     curr = getConnection(session["user-token"])[0].cursor()
@@ -17,7 +17,7 @@ def get_tables():
                 WHERE table_schema = '{}'""".format(schema)
     try:
         curr.execute(query)
-        rows = curr.fetchall()
+        rows = [row[0] for row in curr.fetchall()]
         if len(rows) == 0:
             return sender.OK({"message": "Schema doesn't exists or is empty"})
         return sender.OK(rows)
