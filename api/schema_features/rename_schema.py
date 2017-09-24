@@ -5,7 +5,7 @@ from connections import getConnection
 """
 Renames a schema
 Requires:
-Old name -> schema
+Table name -> schema
 New name -> new_name
 """
 @api.route('/rename-schema', methods=['POST'])

@@ -1,5 +1,5 @@
 #API blueprint init file
-from flask import Blueprint, current_app, session
+from flask import Blueprint, current_app, session, request
 
 api = Blueprint('api', __name__)
 """
@@ -14,6 +14,8 @@ Don't forget to put
 def before_request():
     if "user-token" not in session:
         return sender.Forbidden("Login to use the API")
+    if request.json is None:
+        return sender.BadRequest("JSON expected")
 
 #Import routes
 from .sender import *
