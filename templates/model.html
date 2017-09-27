@@ -2,21 +2,23 @@
 {% block title %}Model{% endblock %}
 {% block head %}
 	{{ super() }}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/drop_schema.js') }}"></script>
 	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
 
 <div class="vertical-menu">
 	 <a href="/model/add-schema">Add schema</a>
-	 <a href="#">Delete selected schemas</a>
+	 <a id="delete_schema" href="#">Drop selected schemas</a>
 </div>
 
 <div class="schemas">
 		<h3>Schemas</h3><br/>
 		<table cellspacing="5px">
 				{% for schema in schemas %}
-				<tr><td><input type="checkbox" name="schema"><a href = "{{ url_for('views.schema', schema = schema[0])}}">{{ schema[0] }}</a></input></td></tr>
+				<tr><td><input type="checkbox" name="schema" value={{ schema }}><a href = "{{ url_for('views.schema', schema = schema[0])}}">{{ schema[0] }}</a></input></td></tr>
 				{% endfor %}
+				<tr><td id="message" style="color:red;font-size:12px;"></td></tr>
 		</table>
 </div>
 

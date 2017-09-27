@@ -2,7 +2,7 @@
 {% block title %}{{schema}}{% endblock %}
 {% block head %}
 	{{ super() }}
-	<script type="text/javascript" src="{{ url_for('static', filename='schema_add.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/schema_add.js') }}"></script>
 	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}

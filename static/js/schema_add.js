@@ -9,10 +9,9 @@ window.onload = function() {
     var message = document.getElementById('message');
     request.onload = function(){
       if(request.readystate = XMLHttpRequest.DONE){
-        console.log(JSON.stringify(request.responseText));
-        console.log(request.status);}
-      //console.log(msg);
-      message.innerHTML='message';
+        var msg = JSON.parse(request.responseText);
+        message.innerHTML=msg.message;
+      }
     }
   }
 }
