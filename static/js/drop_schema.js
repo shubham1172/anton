@@ -13,13 +13,13 @@ window.onload = function() {
       message.innerHTML='Select schema(s) to be deleted.'
     }
     else{
-      for (var j=0; j<checked.length; j++){
+      for (var j=0; j<=checked.length; j++){
         var request = new XMLHttpRequest();
         request.open('POST', '/api/drop-schema', true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify({schema: checked[j].value}));
       }
-      window.location.replace('/model');
+      window.location.href="/model";
     }
   }
 }

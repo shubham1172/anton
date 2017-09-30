@@ -9,6 +9,7 @@ window.onload = function() {
     var message = document.getElementById('message');
     request.onload = function(){
       if(request.readystate = XMLHttpRequest.DONE){
+        document.getElementById('schema_name').value="";
         var msg = JSON.parse(request.responseText);
         message.innerHTML=msg.message;
       }
