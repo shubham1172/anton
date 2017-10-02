@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{schema}}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/schema_rename.js') }}"></script>
+	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+
+<div class="vertical-menu">
+	 <a href="/model">View all schemas</a>
+	 <a href="/model/add-schema">Add schema</a>
+</div>
+
+<div class="rename_schema">
+  <table cellspacing="10px">
+    <tr></tr>
+    <tr>
+      <td></td>
+      <td>New schema name: </td>
+      <td><input type="text" id="schema_name" placeholder="Enter new schema name"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="2" align="center">
+        <input id="rename_schema" type="submit" value="Rename">
+       </td>
+    </tr>
+</div>
+{% endblock %}

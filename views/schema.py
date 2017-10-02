@@ -24,3 +24,7 @@ def schema(schema):
 @views.route('/model/add-schema')
 def add_schema():
     return render_template('schema_add.html', template=getConnection(session["user-token"])[1])
+
+@views.route('/model/<schema>/rename')
+def rename_schema(schema):
+    return render_template('schema_rename.html', template=getConnection(session["user-token"])[1])
