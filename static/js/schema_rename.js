@@ -9,10 +9,11 @@ window.onload = function() {
       request.open('POST', '/api/rename-schema', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.send(JSON.stringify({schema: arr[4],new_name: new_name}));
-      /*request.onload = function(){
+      request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
           //redirect to model
+          window.location="http://localhost/model";
         }
-    }*/
+    }
   }
 }

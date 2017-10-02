@@ -20,11 +20,12 @@ window.onload = function() {
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify({schema: checked[j].value}));
       }
-      /*request.onload = function(){
-        if(request.readystate === XMLHttpRequest.DONE){
-          console.log("i");
-          window.location.reload();
-        }*/
+      request.onload = function(){
+        if(request.readystate = XMLHttpRequest.DONE){
+          //redirect to model
+          window.location="http://localhost/model";
+        }
+      }
     }
   }
 }
