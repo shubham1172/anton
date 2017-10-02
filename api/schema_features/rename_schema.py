@@ -11,7 +11,7 @@ New name -> new_name
 @api.route('/rename-schema', methods=['POST'])
 def rename_schema():
     name = request.json.get('schema', None)
-    new_name = request.json.get('new_schema', None)
+    new_name = request.json.get('new_name', None)
     if not name or not new_name:
         return sender.BadRequest()
     not_allowed = ["pg_toast", "pg_catalog","public","information_schema"]
