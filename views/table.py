@@ -20,3 +20,11 @@ def table(schema,table):
         message = "No columns found. Table name invalid/Table is empty"
     return render_template('table.html', message=message,
         schema=schema, table=table, template=connstring, columns=rows)
+
+#@views.route('/model/<schema>/add-table')
+#def create_table(schema):
+#    return render_template('table_add.html', template=getConnection(session["user-token"])[1])
+
+#@views.route('/model/<schema>/<table>/rename-table')
+#def rename_table(schema,table):
+#    return render_template('table_rename.html', template=getConnection(session["user-token"])[1])
