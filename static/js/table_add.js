@@ -26,6 +26,9 @@ window.onload = function(){
           <option value="FOREIGN KEY">FOREIGN KEY</option>
           <option value="CHECK">CHECK</option></select>
         </td>
+        <td><input id=check${id} type = text name="check_condition" placeholder="Enter CHECK condition" style="display: none;">
+          </input>
+        </td>
         <td><select id=table${id} name="tables" style="display: none;">
           <option value="" disabled selected>Select table</option></select>
         </td>
@@ -56,11 +59,11 @@ window.onload = function(){
     var container = document.createElement("div");
     container.innerHTML = column;
     document.getElementById("column_details").appendChild(container);
-    document.getElementById("cc"+counter).onchange = function(){foreign_key_tables(this,counter)};
+    document.getElementById("cc"+counter).onchange = function(){constraint_check(this,counter)};
     document.getElementById("table"+counter).onchange = function(){ foreign_key_attribute(this,counter)};
     }
 
-    function foreign_key_tables(that,counter) {
+    function constraint_check(that,counter) {
       if (that.value == "FOREIGN KEY") {
         var table_option = document.getElementById("table"+counter);
         table_option.style.display = "block";
@@ -72,6 +75,10 @@ window.onload = function(){
           table_option.appendChild(opt);
         }
       }
+     else if (that.value == "CHECK") {
+       var check_option = document.getElementById("check"+counter);
+       check_option.style.display = "block";
+     }
     }
 
     function foreign_key_attribute(that,counter) {
