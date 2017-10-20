@@ -3,7 +3,6 @@ window.onload = function(){
   var add_column = document.getElementById('add_column');
   var counter=0;
 
-
   function createTemplate(counter){
     var id=counter;
     var htmlTemplate=
@@ -27,14 +26,29 @@ window.onload = function(){
           <option value="FOREIGN KEY">FOREIGN KEY</option>
           <option value="CHECK">CHECK</option></select>
         </td>
-        <td>
-          <select id=fk${id} name="tables" style="display: none;">
-          <option value="" disabled selected>Select your option</option>
+        <td><select id=table${id} name="tables" style="display: none;">
+          <option value="" disabled selected>Select table</option></select>
+        </td>
+        <td><select id=attribute${id} name="attribute" style="display: none;">
+          <option value="" disabled selected>Select attribute</option></select>
         </td>
       </tr>`;
-
       return htmlTemplate;
 }
+  var tables;
+  var attributes;
+  var request;
+  var url=window.location.href;
+  var arr=url.split("/");
+  request = new XMLHttpRequest();
+  request.open('POST', '/api/get-tables', true);
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.send(JSON.stringify({schema: arr[4]}));
+  request.onload = function(){
+    if(request.readystate = XMLHttpRequest.DONE){
+      tables = JSON.parse(request.responseText).data;
+    }
+  }
 
   add_column.onclick = function(){
     counter+=1;
@@ -42,11 +56,47 @@ window.onload = function(){
     var container = document.createElement("div");
     container.innerHTML = column;
     document.getElementById("column_details").appendChild(container);
-    document.getElementById("cc"+counter).onchange = function(){
-      if (this.value == "FOREIGN KEY") {
-        document.getElementById("fk"+counter).style.display = "block";
+    document.getElementById("cc"+counter).onchange = function(){foreign_key_tables(this,counter)};
+    document.getElementById("table"+counter).onchange = function(){ foreign_key_attribute(this,counter)};
+    }
+
+    function foreign_key_tables(that,counter) {
+      if (that.value == "FOREIGN KEY") {
+        var table_option = document.getElementById("table"+counter);
+        table_option.style.display = "block";
+        for(var i=0; i<tables.length; i++) {
+          var opt = document.createElement('option');
+          opt.innerHTML = tables[i];
+          opt.value = tables[i];
+          opt.id = tables[i]+counter;
+          table_option.appendChild(opt);
+        }
       }
     }
-  }
 
-}
+    function foreign_key_attribute(that,counter) {
+      var table_name = that.value;
+      var attribute_option = document.getElementById("attribute"+counter);
+      attribute_option.style.display = "block";
+      var request_att;
+      var url=window.location.href;
+      var arr=url.split("/");
+      request_att = new XMLHttpRequest();
+      request_att.open('POST', '/api/get-table-data', true);
+      request_att.setRequestHeader('Content-Type', 'application/json');
+      request_att.send(JSON.stringify({table: table_name,schema: arr[4]}));
+      request_att.onload = function(){
+        if(request_att.readystate = XMLHttpRequest.DONE){
+          attributes = JSON.parse(request_att.responseText).data.headers;
+        }
+        for(var i=0; i<attributes.length; i++) {
+          var opt_att = document.createElement('option');
+          opt_att.innerHTML = attributes[i];
+          opt_att.value = attributes[i];
+          opt_att.id = attributes[i]+counter;
+          attribute_option.appendChild(opt_att);
+        }
+      }
+    }
+
+  }
