@@ -2,8 +2,8 @@
 {% block title %}{{schema}}{% endblock %}
 {% block head %}
 	{{ super() }}
-	<script type="text/javascript" src="{{ url_for('static', filename='js/table_add.js') }}"></script>
-	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
+	<script type = "text/javascript" src="{{ url_for('static', filename='js/table_add.js') }}"></script>
+	<link href = "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
 
@@ -16,10 +16,16 @@
   <table cellspacing="10px">
     <tr>
       <td>Table name: </td>
-      <td><input type="text" id="table_name" placeholder="Enter table name"></td>
+      <td><input type="text" id="table_name" placeholder="Table name"></td>
     </tr>
-    <tr>
-      <td colspan="2" align="center">
+
+    <table id="column_details" cellspacing="10px"></table>
+
+		<tr>
+			<td>
+				<input id="add_column" type="submit" value="Add column">
+			</td>
+      <td>
         <input id="create_table" type="submit" value="Create table">
        </td>
     </tr>
@@ -27,5 +33,6 @@
 			<td></td>
 			<td id="message" style="color:red;font-size:12px;"></td>
 		</tr>
+	</table>
 </div>
 {% endblock %}
