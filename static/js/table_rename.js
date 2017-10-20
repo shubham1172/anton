@@ -11,8 +11,7 @@ window.onload = function() {
       request.send(JSON.stringify({table: arr[5],new_name: new_name}));
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
-          //redirect to model
-          window.location="http://localhost/model";
+          history.go(-1);
         }
     }
   }
