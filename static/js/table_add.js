@@ -27,9 +27,11 @@ window.onload = function(){
         <option value="" disabled selected>Select your option</option>
       </td>
     </tr>`;
-    
-  add_column.onclick = function(){
-    document.getElementById('column_details').innerHTML+=column;
+
+    add_column.onclick = function(){
+      var container = document.createElement("div");
+      container.innerHTML = column;
+      document.getElementById("column_details").appendChild(container);
   }
 
   function foreign_key(that){
