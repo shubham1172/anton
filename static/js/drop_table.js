@@ -1,6 +1,6 @@
 window.onload = function() {
-  var delete_table = document.getElementById("delete_schema");
-  delete_schema.onclick = function() {
+  var delete_table = document.getElementById("delete_table");
+  delete_table.onclick = function() {
     var tables = document.getElementsByTagName("input");
     var checked = [];
     var url=window.location.href;

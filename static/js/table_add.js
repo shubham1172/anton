@@ -19,7 +19,7 @@ window.onload = function(){
           <option value="varchar">String</<option>
           <option value="date">Date</<option></select>
         </td>
-        <td><select name="column_contraint" onchange="foreign_key(this,${id});">
+        <td><select id=cc${id} name="column_contraint">
           <option value="" disabled selected>Select column contraint</option>
           <option value="NOT NULL">NOT NULL</option>
           <option value="PRIMARY KEY">PRIMARY KEY</option>
@@ -28,7 +28,7 @@ window.onload = function(){
           <option value="CHECK">CHECK</option></select>
         </td>
         <td>
-          <select id="fk"+${id} name="tables" style="display: none;">
+          <select id=fk${id} name="tables" style="display: none;">
           <option value="" disabled selected>Select your option</option>
         </td>
       </tr>`;
@@ -42,13 +42,11 @@ window.onload = function(){
     var container = document.createElement("div");
     container.innerHTML = column;
     document.getElementById("column_details").appendChild(container);
+    document.getElementById("cc"+counter).onchange = function(){
+      if (this.value == "FOREIGN KEY") {
+        document.getElementById("fk"+counter).style.display = "block";
+      }
+    }
   }
-
-  function foreign_key(that,id){
-    if (that.value == "FOREIGN KEY") {
-            document.getElementById("fk"+id).style.display = "block";
-        }
-  }
-
 
 }
