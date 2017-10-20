@@ -3,6 +3,8 @@ window.onload = function() {
   delete_schema.onclick = function() {
     var tables = document.getElementsByTagName("input");
     var checked = [];
+    var url=window.location.href;
+    var arr=url.split("/");
     for (var i = 0; i < tables.length; i++) {
         if (tables[i].checked) {
           checked.push(tables[i]);
@@ -18,7 +20,8 @@ window.onload = function() {
         request = new XMLHttpRequest();
         request.open('POST', '/api/drop-table', true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({table: checked[j].value}));
+        request.send(JSON.stringify({schema: arr[4],table: checked[j].value}));
+
       }
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
