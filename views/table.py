@@ -23,8 +23,20 @@ def table(schema,table):
 
 @views.route('/model/<schema>/add-table')
 def create_table(schema):
-    return render_template('table_add.html', template=getConnection(session["user-token"])[1])
+    return render_template('table_create.html', template=getConnection(session["user-token"])[1])
 
 @views.route('/model/<schema>/<table>/rename-table')
 def rename_table(schema,table):
     return render_template('table_rename.html', template=getConnection(session["user-token"])[1])
+
+@views.route('/model/<schema>/<table>/alter-table')
+def alter_table(schema,table):
+    return render_template('table_alter.html', schema=schema, table=table, template=getConnection(session["user-token"])[1])
+
+@views.route('/model/<schema>/<table>/insert-data')
+def insert_table(schema,table):
+    return render_template('table_insert.html', schema=schema, table=table, template=getConnection(session["user-token"])[1])
+
+@views.route('/model/<schema>/<table>/structure')
+def table_structure(schema,table):
+    return render_template('table_structure.html',schema=schema, table=table ,columns=rows , template=getConnection(session["user-token"])[1])

@@ -2,7 +2,7 @@
 {% block title %}{{schema}}{% endblock %}
 {% block head %}
 	{{ super() }}
-	<script type = "text/javascript" src="{{ url_for('static', filename='js/table_add.js') }}"></script>
+	<script type = "text/javascript" src="{{ url_for('static', filename='js/table_create.js') }}"></script>
 	<link href = "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
@@ -18,7 +18,7 @@
 			<td colspan="5">Enter SQL query to create table:</td>
 		</tr>
 		<tr>
-			<td><textarea id="create_table_query" placeholder="CREATE table <tablename>(col_name col_definition, col_name col_definition);"rows="10" cols="55"></textarea></td>
+			<td><textarea id="create_table_query" rows="10" cols="55"></textarea></td>
 		</tr>
     <!---<tr>
       <td>Table name: </td>

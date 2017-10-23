@@ -2,15 +2,16 @@
 {% block title %}{{table}}|{{schema}}{% endblock %}
 {% block head %}
 	{{ super() }}
+	<script type = "text/javascript" src="{{ url_for('static', filename='js/table_alter.js') }}"></script>
 	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
 <div class="vertical-menu">
 	 <a href="/model">View all schemas</a>
 	 <a href="/model/{{schema}}">View all tables</a>
+	 <a href="/model/{{schema}}/{{table}}">View table data</a>
 	 <a href="/model/{{schema}}/{{table}}/structure">View table structure</a>
 	 <a href="/model/{{schema}}/{{table}}/insert-data">Insert data</a>
-	 <a href="/model/{{schema}}/{{table}}/alter-table">Alter data</a>
 </div>
 
 <div class="columns">
@@ -18,19 +19,19 @@
     {{message}}
 		<table cellspacing="5px">
 			<tr>
-					 <td><font color="grey" size="1.5px"><i>View side menu for options :)</i></font><a href="/model"></td>
+				<td colspan="5">Enter SQL query to alter table:</td>
 			</tr>
-			<tr></tr>
-      <tr>
-        <td><b>Column</b></td>
-        <td><b>Data Type</b></td>
-      </tr>
-			{% for column in columns %}
 			<tr>
-        <td><input type="checkbox" name="row">{{ column[0] }}</input></td>
-        <td>{{ column[1] }}</td>
-      </tr>
-			{% endfor %}
+				<td><textarea id="alter_table_query" rows="10" cols="55"></textarea></td>
+			</tr>
+		  <tr>
+				<td>
+	        <input id="alter_table" type="submit" value="Alter!">
+	       </td>
+	    </tr>
+			<tr>
+				<td id="message" style="color:red;font-size:12px;"></td>
+			</tr>
 		</table>
 </div>
 {% endblock %}

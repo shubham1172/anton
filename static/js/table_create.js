@@ -3,7 +3,7 @@ window.onload = function(){
   var url=window.location.href;
   var arr=url.split("/");
   var sql_query = document.getElementById('create_table_query');
-  sql_query.placeholder="CREATE table "+arr[4]+".<tablename>(col_name col_definition, col_name col_definition);";
+  sql_query.value="CREATE table "+arr[4]+".table_name (\n\tcolumn1 datatype,\n\tcolumn2 datatype,\n\tcolumn3 datatype,\n\t....\n);";
 
   /*var counter=0;
 
