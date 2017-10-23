@@ -37,6 +37,6 @@ def alter_table(schema,table):
 def insert_table(schema,table):
     return render_template('table_insert.html', schema=schema, table=table, template=getConnection(session["user-token"])[1])
 
-@views.route('/model/<schema>/<table>/structure')
+@views.route('/model/<schema>/<table>/table-data')
 def table_structure(schema,table):
-    return render_template('table_structure.html',schema=schema, table=table ,columns=rows , template=getConnection(session["user-token"])[1])
+    return render_template('table_data.html',schema=schema, table=table, template=getConnection(session["user-token"])[1])
