@@ -1,12 +1,16 @@
 window.onload = function(){
   var create_table = document.getElementById('create_table');
-  var add_column = document.getElementById('add_column');
-  var counter=0;
+  var url=window.location.href;
+  var arr=url.split("/");
+  var sql_query = document.getElementById('create_table_query');
+  sql_query.placeholder="CREATE table "+arr[4]+".<tablename>(col_name col_definition, col_name col_definition);";
+
+  /*var counter=0;
 
   function createTemplate(counter){
     var id=counter;
     var htmlTemplate=
-    `<tr id=${id}>
+    `${id}.<tr id=${id}>
         <td>Column name: </td>
         <td><input type="text" name="column_name" placeholder="Enter column name"></td>
         <td><select name="column_type">
@@ -105,5 +109,20 @@ window.onload = function(){
         }
       }
     }
-
+*/
+  create_table.onclick = function(){
+    var request;
+    var sql_query = document.getElementById('create_table_query').value;
+    request = new XMLHttpRequest();
+    request.open('POST', '/api/raw-sql', true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(JSON.stringify({query: sql_query}));
+    request.onload = function(){
+      if(request.readystate = XMLHttpRequest.DONE){
+        var message = document.getElementById("message");
+        var msg = JSON.parse(request.responseText);
+        message.innerHTML=msg.message;
+      }
+    }
   }
+}

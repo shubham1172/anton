@@ -21,7 +21,6 @@ window.onload = function() {
         request.open('POST', '/api/drop-table', true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify({schema: arr[4],table: checked[j].value}));
-
       }
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){

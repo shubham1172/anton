@@ -14,7 +14,13 @@
 
 <div class="add_table">
   <table cellspacing="10px">
-    <tr>
+		<tr>
+			<td colspan="5">Enter SQL query to create table:</td>
+		</tr>
+		<tr>
+			<td><textarea id="create_table_query" placeholder="CREATE table <tablename>(col_name col_definition, col_name col_definition);"rows="10" cols="55"></textarea></td>
+		</tr>
+    <!---<tr>
       <td>Table name: </td>
       <td><input type="text" id="table_name" placeholder="Table name"></td>
     </tr>
@@ -24,13 +30,13 @@
 		<tr>
 			<td>
 				<input id="add_column" type="submit" value="Add column">
-			</td>
-      <td>
+			</td>--->
+	  <tr>
+			<td>
         <input id="create_table" type="submit" value="Create table">
        </td>
     </tr>
 		<tr>
-			<td></td>
 			<td id="message" style="color:red;font-size:12px;"></td>
 		</tr>
 	</table>
