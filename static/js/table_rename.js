@@ -1,7 +1,7 @@
 window.onload = function() {
   var rename_table = document.getElementById('rename_table');
 
-  rename_schema.onclick = function(){
+  rename_table.onclick = function(){
       var url=window.location.href;
       var arr=url.split("/");
       var request = new XMLHttpRequest();

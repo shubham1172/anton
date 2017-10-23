@@ -121,7 +121,12 @@ window.onload = function(){
       if(request.readystate = XMLHttpRequest.DONE){
         var message = document.getElementById("message");
         var msg = JSON.parse(request.responseText);
-        message.innerHTML=msg.message;
+        if (msg.message=="no results to fetch"){
+          message.innerHTML="Table succesfully created!";
+        }
+        else{
+            message.innerHTML=msg.message;
+        }
       }
     }
   }
