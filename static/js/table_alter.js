@@ -26,7 +26,7 @@ window.onload = function() {
           var message = document.getElementById("message");
           var msg = JSON.parse(request.responseText);
           if (msg.message=="no results to fetch"){
-            message.innerHTML="Table succesfully altered!";
+            location.href = document.referrer;
           }
           else{
             message.innerHTML=msg.message;

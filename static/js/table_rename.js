@@ -11,7 +11,7 @@ window.onload = function() {
       request.send(JSON.stringify({schema: arr[4],table: arr[5],new_name: new_name}));
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
-          history.go(-1);
+          location.href = document.referrer;
         }
     }
   }

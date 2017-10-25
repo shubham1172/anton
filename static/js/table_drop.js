@@ -24,8 +24,7 @@ window.onload = function() {
       }
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
-          //redirect to model
-          window.location="http://localhost/model";
+          window.location.reload();
         }
       }
     }
