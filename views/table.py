@@ -37,6 +37,10 @@ def insert_table(schema,table):
 def table_structure(schema,table):
     return render_template('table_data.html',schema=schema, table=table, template=getConnection(session["user-token"])[1])
 
+@views.route('/model/<schema>/<table>/add-column')
+def table_add_column(schema,table):
+    return render_template('table_add_column.html',schema=schema, table=table, template=getConnection(session["user-token"])[1])
+
 @views.route('/model/<schema>/<table>/alter/<column>/column-name')
 def alter_column_name(schema,table,column):
     return render_template('table_alter.html',schema=schema, table=table, column=column, template=getConnection(session["user-token"])[1])

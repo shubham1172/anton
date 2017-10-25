@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{table}}|{{schema}}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/table_add_column.js') }}"></script>
+	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+<div class="vertical-menu">
+	 <a href="/model">View all schemas</a>
+	 <a href="/model/{{schema}}">View all tables</a>
+	 <a href="/model/{{schema}}/{{table}}/table-data">View table data</a>
+	 <a href="/model/{{schema}}/{{table}}/insert-data">Insert data</a>
+</div>
+
+<div class="add-column">
+  <table cellspacing="10px">
+    <h3><a href = "{{ url_for('views.schema', schema=schema)}}">{{schema}}</a> | {{table}}</h3><br/>
+    {{message}}
+    <tr>
+      <td></td>
+      <td>Column name: </td>
+      <td><input type="text" id="column_name" placeholder="Column name"></td>
+      <td></td>
+      <td>Column definition: </td>
+      <td><input type="text" id="column_definition" placeholder="Column definition"></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input id="add_column" type="submit" value="Add column">
+       </td>
+    </tr>
+</div>
+{% endblock %}
