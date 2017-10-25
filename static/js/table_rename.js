@@ -8,7 +8,7 @@ window.onload = function() {
       var new_name = document.getElementById('table_name').value;
       request.open('POST', '/api/rename-table', true);
       request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify({table: arr[5],new_name: new_name}));
+      request.send(JSON.stringify({schema: arr[4],table: arr[5],new_name: new_name}));
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
           history.go(-1);

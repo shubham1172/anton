@@ -19,7 +19,7 @@
 		<table cellspacing="5px">
 				{% for table in tables %}
 				<tr><td><input type="checkbox" name="table" value="{{ table[0] }}"><a href = "{{ url_for('views.table', schema = schema, table = table[0])}}">{{ table[0] }}</a></input></td>
-				<td style="color:grey;font-size:12px;"><a href="{{ url_for('views.rename_table', schema = schema[0], table = table[0])}}">Rename</a></td></tr>
+				<td style="color:grey;font-size:12px;"><a href="{{ url_for('views.rename_table', schema = schema, table = table[0])}}">Rename</a></td></tr>
 				{% endfor %}
 				<tr><td id="message" style="color:red;font-size:12px;"></td></tr>
 		</table>
