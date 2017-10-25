@@ -2,6 +2,7 @@
 {% block title %}{{table}}|{{schema}}{% endblock %}
 {% block head %}
 	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/table_column_drop.js') }}"></script>
 	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
@@ -28,8 +29,10 @@
 			<tr>
         <td>{{ column[0] }}</td><td style="color:grey;font-size:12px;"><a name="column_name" id="{{column[0]}}" href="{{ url_for('views.alter_column_name', schema = schema, table=table, column=column[0])}}">Alter</a></td><td></td>
         <td>{{ column[1] }}</td><td style="color:grey;font-size:12px;"><a name="data_type" id="{{column[1]}}" href="{{ url_for('views.alter_column_definition', schema = schema, table=table, column=column[0])}}">Alter</a></td>
-      </tr>
+				<td style="color:red;font-size:12px;"><a name="{{column[0]}}" id="delete_column">Delete column</a></td>
+			</tr>
 			{% endfor %}
+			<tr><td id="message" style="color:red;font-size:12px;"></td></tr>
 		</table>
 </div>
 {% endblock %}

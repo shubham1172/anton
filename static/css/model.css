@@ -3,6 +3,8 @@
 	font-size: 22px;
  }
 
+a[onclick] { cursor: pointer }
+
  a{
 	 text-decoration: none;
  }
