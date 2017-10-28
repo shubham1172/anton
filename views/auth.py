@@ -9,7 +9,7 @@ def index():
     #If logged in, redirect to model
     if "user-token" in session:
         return redirect('/model')
-    return current_app.send_static_file('index.html')
+    return current_app.send_static_file('home.html')
 
 @views.route('/login', methods=['POST'])
 def login():
