@@ -113,19 +113,30 @@ window.onload = function(){
   create_table.onclick = function(){
     var request;
     var sql_query = document.getElementById('create_table_query').value;
-    request = new XMLHttpRequest();
-    request.open('POST', '/api/raw-sql', true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.send(JSON.stringify({query: sql_query}));
-    request.onload = function(){
-      if(request.readystate = XMLHttpRequest.DONE){
-        var message = document.getElementById("message");
-        var msg = JSON.parse(request.responseText);
-        if (msg.message=="no results to fetch"){
-          message.innerHTML="Table succesfully created!";
-        }
-        else{
-            message.innerHTML=msg.message;
+    if(sql_query = `CREATE table mofo.table_name (
+                      	column1 datatype,
+                      	column2 datatype,
+                      	column3 datatype,
+                      	....
+                      );`) {
+                        var message = document.getElementById("message");
+                        message.innerHTML = "Enter SQL query";
+                      }
+    else{
+      request = new XMLHttpRequest();
+      request.open('POST', '/api/raw-sql', true);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify({query: sql_query}));
+      request.onload = function(){
+        if(request.readystate = XMLHttpRequest.DONE){
+          var message = document.getElementById("message");
+          var msg = JSON.parse(request.responseText);
+          if (msg.message=="no results to fetch"){
+            message.innerHTML="Table succesfully created!";
+          }
+          else{
+              message.innerHTML=msg.message;
+          }
         }
       }
     }
