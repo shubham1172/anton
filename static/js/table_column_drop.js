@@ -16,7 +16,7 @@ window.onload = function() {
           var message = document.getElementById("message");
           var msg = JSON.parse(request.responseText);
           if (msg.message=="no results to fetch"){
-            location.href = document.referrer;
+            document.location="http://"+arr[2]+"/"+arr[3]+"/"+arr[4]+"/"+arr[5];
           }
           else{
             message.innerHTML=msg.message;
