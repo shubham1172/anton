@@ -9,6 +9,20 @@ a[onclick] { cursor: pointer }
 	 text-decoration: none;
  }
 
+ #table_data {
+    border-collapse: collapse;
+}
+
+#table_data td {
+    border: 1px solid #ddd;
+    padding: 15px;
+}
+
+#table_data tr:nth-child(even){background-color: #f2f2f2;}
+
+#table_data tr:hover {background-color: #ddd;}
+
+
  .vertical-menu {
 	  float:left;
     width: 200px;

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{schema}}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/table_alter.js') }}"></script>
+	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+
+<div class="vertical-menu">
+  <a href="/model">View all schemas</a>
+  <a href="/model/{{schema}}">View all tables</a>
+   <a href="/model/{{schema}}/{{table}}">View table structure</a>
+  <a href="/model/{{schema}}/{{table}}/table-data">View table data</a>
+  <a href="/model/{{schema}}/{{table}}/insert-data">Insert data</a>
+</div>
+
+<div class="alter_table">
+  <table cellspacing="10px">
+    <tr></tr>
+    <tr>
+      <td></td>
+      <td id="alter_msg"></td>
+      <td><input type="text" name={{column}} id="new_value"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="2" align="center">
+        <input id="alter_table" type="submit" value="Alter!">
+       </td>
+    </tr>
+    <tr>
+			<td colspan="5" id="message" style="color:red;font-size:12px;"></td>
+		</tr>
+</div>
+{% endblock %}

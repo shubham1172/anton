@@ -16,22 +16,8 @@
 
 <div class="columns">
 		<h3><a href = "{{ url_for('views.schema', schema=schema)}}">{{schema}}</a> | {{table}}</h3><br/>
-    {{message}}
-		<table cellspacing="5px">
-			<tr>
-				<td colspan="5">Enter SQL query to alter table:</td>
-			</tr>
-			<tr>
-				<td><textarea id="alter_table_query" rows="10" cols="55"></textarea></td>
-			</tr>
-		  <tr>
-				<td>
-	        <input id="alter_table" type="submit" value="Alter!">
-	       </td>
-	    </tr>
-			<tr>
-				<td id="message" style="color:red;font-size:12px;"></td>
-			</tr>
+		<table id="table_data" cellspacing="5px">
+			<tr><td id="message" style="color:red;font-size:12px;"></td></tr>
 		</table>
 </div>
 {% endblock %}
