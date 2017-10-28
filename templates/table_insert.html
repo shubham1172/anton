@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{table}}|{{schema}}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<script type = "text/javascript" src="{{ url_for('static', filename='js/table_insert.js') }}"></script>
+	<link href= "{{ url_for('static', filename='css/model.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+<div class="vertical-menu">
+	 <a href="/model">View all schemas</a>
+	 <a href="/model/{{schema}}">View all tables</a>
+	 <a href="/model/{{schema}}/{{table}}">View table structure</a>
+	 <a href="/model/{{schema}}/{{table}}/insert-data">Insert data</a>
+
+</div>
+
+<div class="columns">
+		<h3><a href = "{{ url_for('views.schema', schema=schema)}}">{{schema}}</a> | {{table}}</h3><br/>
+		<table id="table_insert" cellspacing="5px">
+
+		</table>
+    <input id ="insert_data" type="submit" value="Insert data"/>
+    <p id="message" style="color:red;font-size:12px;"></p>
+</div>
+{% endblock %}
