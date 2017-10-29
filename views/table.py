@@ -23,7 +23,7 @@ def table(schema,table):
 
 @views.route('/model/<schema>/add-table')
 def create_table(schema):
-    return render_template('table_create.html', template=getConnection(session["user-token"])[1])
+    return render_template('table_create.html', schema=schema, template=getConnection(session["user-token"])[1])
 
 @views.route('/model/<schema>/<table>/rename-table')
 def rename_table(schema,table):

@@ -17,4 +17,7 @@ def raw_sql():
         curr.execute(query)
         return sender.OK(curr.fetchall())
     except Exception as e:
-        return sender.Error(str(e))
+        if "no results to fetch" == str(e): # not an error
+            return sender.OK("executed")
+        else:
+            return sender.Error(str(e))

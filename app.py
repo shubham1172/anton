@@ -22,7 +22,7 @@ def site_map():
 
 #Start app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, threaded=True)
+    app.run(host='0.0.0.0', port=80, threaded=True, debug=True)
 
 #note: added threaded as true to support multiple requests in the debug server
 #used while calling api functions from view requests
