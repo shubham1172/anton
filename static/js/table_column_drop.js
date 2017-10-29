@@ -15,7 +15,7 @@ window.onload = function() {
         if(request.readystate = XMLHttpRequest.DONE){
           var message = document.getElementById("message");
           var msg = JSON.parse(request.responseText);
-          if (msg.message=="no results to fetch"){
+          if (msg.data=="executed"){
             document.location="http://"+arr[2]+"/"+arr[3]+"/"+arr[4]+"/"+arr[5];
           }
           else{
