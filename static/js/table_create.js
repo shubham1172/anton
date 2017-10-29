@@ -112,13 +112,13 @@ window.onload = function(){
 */
   create_table.onclick = function(){
     var request;
-    var sql_query = document.getElementById('create_table_query').value;
-    if(sql_query == `CREATE table mofo.table_name (
-                      	column1 datatype,
-                      	column2 datatype,
-                      	column3 datatype,
-                      	....
-                      );`) {
+    var sqlquery = document.getElementById('create_table_query').value;
+    if(sqlquery == `CREATE table `+arr[4]+`.table_name (
+                  	column1 datatype,
+                  	column2 datatype,
+                  	column3 datatype,
+                  	....
+                  );`) {
                         var message = document.getElementById("message");
                         message.innerHTML = "Enter SQL query";
                       }
@@ -131,7 +131,7 @@ window.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
           var message = document.getElementById("message");
           var msg = JSON.parse(request.responseText);
-          if (msg.message=="no results to fetch"){
+          if (msg.data=="executed"){
             message.innerHTML="Table succesfully created!";
           }
           else{
