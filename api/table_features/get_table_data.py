@@ -31,6 +31,11 @@ def get_table_data():
             data["message"] = "Table doesn't exists or is empty"
         else:
             data["headers"] = [desc[0] for desc in curr.description]
+            dataQuery = """SELECT data_type FROM
+                information_schema.columns WHERE
+                table_name = '{}' AND table_schema = '{}';""".format(tablename,schemaname);
+            curr.execute(dataQuery);
+            data["types"] = [type[0] for type in curr.fetchall()]
             data["values"] = rows
         return sender.OK(data)
     except Exception as e:
