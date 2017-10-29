@@ -30,7 +30,7 @@
 			<tr>
         <td>{{ column[0] }}</td><td style="color:grey;font-size:12px;"><a name="column_name" id="{{column[0]}}" href="{{ url_for('views.alter_column_name', schema = schema, table=table, column=column[0])}}">Alter</a></td><td></td>
         <td>{{ column[1] }}</td><td style="color:grey;font-size:12px;"><a name="data_type" id="{{column[1]}}" href="{{ url_for('views.alter_column_definition', schema = schema, table=table, column=column[0])}}">Alter</a></td>
-				<td style="color:red;font-size:12px;"><a name="{{column[0]}}" id="delete_column">Drop column</a></td>
+				<td style="color:red;font-size:12px;"><a name="{{column[0]}}" href="#" id="delete_column">Drop column</a></td>
 			</tr>
 			{% endfor %}
 			<tr><td id="message" style="color:red;font-size:12px;"></td></tr>
