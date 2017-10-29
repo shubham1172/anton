@@ -13,13 +13,12 @@ window.onload = function() {
       request.send(JSON.stringify({query: sql_query}));
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
-          var message = document.getElementById("message");
-          var msg = JSON.parse(request.responseText);
-          if (msg.message=="no results to fetch"){
+          var response = JSON.parse(request.responseText);
+          if (response.code==200){
             document.location=document.referrer;
           }
           else{
-            message.innerHTML=msg.message;
+            document.getElementById("message").innerHTML=response.message;
           }
         }
     }
