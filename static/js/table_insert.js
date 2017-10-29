@@ -62,7 +62,7 @@ window.onload = function() {
               for(var j=0;j<Array.from(toClear).length-1;j++){
                 toClear[j].value="";
               }
-              document.getElementById('message').innerHTML=response.data;
+              document.getElementById('message').innerHTML="Data inserted!";
             }else{
               document.getElementById('message').innerHTML=response.message;
             }
