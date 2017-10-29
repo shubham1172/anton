@@ -24,7 +24,7 @@ window.onload = function() {
       }
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
-          window.location.reload();
+          window.location.href=url;
         }
       }
     }
