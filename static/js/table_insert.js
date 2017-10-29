@@ -33,7 +33,7 @@ window.onload = function() {
   var insert_data = document.getElementById('insert_data');
   insert_data.onclick = function () {
     var row = Array.from(document.getElementsByTagName('input')).map(getValue);
-    var sql_query="INSERT INTO "+arr[5]; var col_names = ""; var col_datas = "";
+    var sql_query="INSERT INTO "+arr[4]+"."+arr[5]; var col_names = ""; var col_datas = "";
       for(var i=0;i<column_name.length;i++){
           if(row[i]!=''){
             if(column_name[i].type=='character varying'||column_name[i].type=='text'){
@@ -56,10 +56,14 @@ window.onload = function() {
         insert_request.send(JSON.stringify({query: sql_query}));
         insert_request.onload = function(){
           if(insert_request.readystate = XMLHttpRequest.DONE){
+            var response = JSON.parse(insert_request.responseText);
             if(insert_request.status===200){
-              window.location='http://localhost/model/'+arr[4]+'/'+arr[5]+'/table-data';
+              toClear = document.getElementsByTagName('input');
+              for(var j=0;j<Array.from(toClear).length-1;j++){
+                toClear[j].value="";
+              }
+              document.getElementById('message').innerHTML=response.data;
             }else{
-              var response = JSON.parse(insert_request.responseText);
               document.getElementById('message').innerHTML=response.message;
             }
           }
