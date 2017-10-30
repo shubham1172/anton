@@ -11,7 +11,10 @@ window.onload = function() {
       if(request.readystate = XMLHttpRequest.DONE){
         document.getElementById('schema_name').value="";
         var msg = JSON.parse(request.responseText);
-        message.innerHTML=msg.message;
+        if(msg.code==200)
+              message.innerHTML=msg.data;
+        else
+             message.innerHTML=msg.message;
       }
     }
   }
