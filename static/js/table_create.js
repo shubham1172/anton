@@ -113,7 +113,7 @@ window.onload = function(){
   create_table.onclick = function(){
     var request;
     var sqlquery = document.getElementById('create_table_query').value;
-    if(sqlquery == `CREATE table `+arr[4]+`.table_name (
+    if(sqlquery == "CREATE table "+arr[4]+`.table_name (
                   	column1 datatype,
                   	column2 datatype,
                   	column3 datatype,

@@ -25,7 +25,7 @@ window.onload = function() {
         if(request.readystate = XMLHttpRequest.DONE){
           var message = document.getElementById("message");
           var msg = JSON.parse(request.responseText);
-          if (msg.message=="no results to fetch"){
+          if (msg.code==200){
             location.href = document.referrer;
           }
           else{

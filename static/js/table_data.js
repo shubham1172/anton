@@ -1,3 +1,5 @@
+var response;
+
 function getHTML(column_name, type, row, length) {
   var html="<tr>";
   for (var i=0 ; i<length ; i++)
@@ -7,7 +9,7 @@ function getHTML(column_name, type, row, length) {
   html+="</tr>";
   for (var i=0 ; i<row.length ; i++)
   {
-    html+="<tr>";
+    html+="<tr id="+i+">";
     for(var j=0 ; j<length ; j++) {
       html+="<td id="+row[i][j]+" class=\""+column_name[j]+"\" headers =\""+type[j]+"\" ondblclick='addInput(this);'>"+row[i][j]+"</td>";
     }
@@ -18,6 +20,16 @@ function getHTML(column_name, type, row, length) {
 
 function updateTable(value, id, name, type) {
   //console.log(type);
+  var column_name = response.data.headers;
+  var row = response.data.values;
+  var rowid = document.getElementById(id).parentNode.id;
+  console.log(rowid);
+  var index1 = column_name.indexOf(name);
+  var index2 = row[rowid].indexOf(id);
+  column_name.splice(index1, 1);
+  row[rowid].splice(index2, 1);
+  console.log(column_name);
+  console.log(row);
   var url=window.location.href;
   var arr=url.split("/");
   var sql_query;
@@ -84,7 +96,7 @@ window.onload = function() {
   request.send(JSON.stringify({table: arr[5],schema: arr[4]}));
   request.onload = function(){
     if(request.readystate = XMLHttpRequest.DONE){
-      var response = JSON.parse(request.responseText);
+       response = JSON.parse(request.responseText);
       if(response.data.message == "Table doesn't exists or is empty") {
         document.getElementById("message").innerHTML = "Table is empty!";
       }
