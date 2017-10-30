@@ -16,16 +16,19 @@ window.onload = function() {
     }
     else{
       var request;
-      for (var j=0; j<=checked.length; j++){
+      for (var j=0; j<checked.length; j++){
         request = new XMLHttpRequest();
         request.open('POST', '/api/drop-table', true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({schema: arr[4],table: checked[j].value}));
-      }
-      request.onload = function(){
-        if(request.readystate = XMLHttpRequest.DONE){
-          window.location.href=url;
+        request.onload = function(){
+          if(request.readystate = XMLHttpRequest.DONE){
+            //redirect to model
+            console.log("redirecting "+j);
+            if(j==(checked.length))
+              window.location.href=url;
+          }
         }
+        request.send(JSON.stringify({schema: arr[4],table: checked[j].value}));
       }
     }
   }
