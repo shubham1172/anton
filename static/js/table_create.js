@@ -126,7 +126,7 @@ window.onload = function(){
       request = new XMLHttpRequest();
       request.open('POST', '/api/raw-sql', true);
       request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify({query: sql_query}));
+      request.send(JSON.stringify({query: sqlquery}));
       request.onload = function(){
         if(request.readystate = XMLHttpRequest.DONE){
           var message = document.getElementById("message");
