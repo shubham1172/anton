@@ -14,17 +14,19 @@ window.onload = function() {
     }
     else{
       var request;
-      for (var j=0; j<=checked.length; j++){
+      for (var j=0; j<checked.length; j++){
         request = new XMLHttpRequest();
         request.open('POST', '/api/drop-schema', true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({schema: checked[j].value}));
-      }
-      request.onload = function(){
-        if(request.readystate = XMLHttpRequest.DONE){
-          //redirect to model
-          window.location="http://localhost/model";
+        request.onload = function(){
+          if(request.readystate = XMLHttpRequest.DONE){
+            //redirect to model
+            console.log("redirecting "+j);
+            if(j==(checked.length))
+              window.location="http://localhost/model";
+          }
         }
+        request.send(JSON.stringify({schema: checked[j].value}));
       }
     }
   }
