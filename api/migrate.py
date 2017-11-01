@@ -58,6 +58,10 @@ def import_table():
         return sender.BadRequest()
     if not schema_name:
         schema_name = "public"
+    columns = data.get('columns', None)
+    values = data.get('values', None)
+    if not columns or not values:
+        return sender.BadRequest('Export data malformed')
     try:
         conn, connstring = getConnection(session["user-token"])
         username = connstring["username"]
@@ -70,7 +74,7 @@ def import_table():
             return sender.Error("Table already exists. Remove it to import")
         #create table
         create_query = """CREATE TABLE {}.\"{}\"(""".format(schema_name, table_name)
-        for items in data["columns"]:
+        for items in columns:
             create_query=create_query+items[0]+" "+items[4]
             if items[3]=="NO":
                 create_query=create_query+" NOT NULL"
@@ -81,8 +85,8 @@ def import_table():
         curr.execute(create_query)
         #insert data
         insert_query = """INSERT INTO {}.\"{}\" VALUES""".format(schema_name, table_name)
-        insert_query = insert_query + "(%s"+", %s"*(len(data["values"][0])-1)+")"
-        curr.executemany(insert_query, data["values"])
+        insert_query = insert_query + "(%s"+", %s"*(len(values[0])-1)+")"
+        curr.executemany(insert_query, values)
         return sender.OK("Data imported successfully!")
     except Exception as e:
         return sender.Error(str(e))
