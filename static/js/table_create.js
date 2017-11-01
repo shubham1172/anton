@@ -63,7 +63,27 @@ window.onload = function(){
     modify_query(tablename.value, counter);
   }
 
-
+  function modify_query(tn, counter) {
+      sql_query.value="CREATE table "+arr[4]+"."+tn+"( ";
+      for (var i=1;i<=counter;i++) {
+        sql_query.value+=("\n\t"+document.getElementById("cn"+i).value);
+        sql_query.value+=(" "+document.getElementById("dt"+i).value);
+        if(document.getElementById('cc'+i).value=="FOREIGN KEY"){
+          sql_query.value+=(" REFERENCES "+arr[4]+"."+document.getElementById("table"+i).value);
+          sql_query.value+=(" ("+document.getElementById("attribute"+i).value+")");
+        }
+        else if(document.getElementById('cc'+i).value=="CHECK"){
+           sql_query.value+=(" "+document.getElementById("cc"+i).value);
+           sql_query.value+=(" ("+document.getElementById("check"+i).value+")");
+        }
+        else {
+          sql_query.value+=(" "+document.getElementById("cc"+i).value);
+        }
+        sql_query.value+=",";
+      }
+      sql_query.value =(sql_query.value.slice(0,-1));
+      sql_query.value +="\n);";
+    }
 
   add_column.onclick = function(){
     counter+=1;
