@@ -21,7 +21,7 @@ def get_table_data():
         schemaname = "public"
     curr = getConnection(session["user-token"])[0].cursor()
     query = """SELECT *
-                FROM {}.{}
+                FROM {}.\"{}\"
                 LIMIT 20""".format(schemaname,tablename)
     try:
         curr.execute(query)
