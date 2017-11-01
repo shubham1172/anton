@@ -25,7 +25,7 @@ window.onload = function(){
           <option value="date">Date</<option></select>
         </td>
         <td><select id=cc${id} name="column_contraint">
-          <option value="" disabled selected>Select column contraint</option>
+          <option value="" disabled selected>Select column constraint</option>
           <option value="NOT NULL">NOT NULL</option>
           <option value="PRIMARY KEY">PRIMARY KEY</option>
           <option value="UNIQUE">UNIQUE</option>
@@ -104,10 +104,12 @@ window.onload = function(){
     document.getElementById("attribute"+counter).onchange = function(){ modify_query(tablename.value,counter)};
     }
 
+
+
     function constraint_check(that,counter) {
       document.getElementById("check"+counter).style.display = "none";
-      document.getElementById("attribute"+counter).style.display = "none";
       document.getElementById("table"+counter).style.display = "none";
+      document.getElementById("attribute"+counter).style.display = "none";
       if (that.value == "FOREIGN KEY") {
         var table_option = document.getElementById("table"+counter);
         table_option.style.display = "block";
