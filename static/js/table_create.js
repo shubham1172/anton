@@ -1,25 +1,27 @@
 window.onload = function(){
   var create_table = document.getElementById('create_table');
+  var tablename = document.getElementById('table_name');
   var url=window.location.href;
   var arr=url.split("/");
   var sql_query = document.getElementById('create_table_query');
   sql_query.value="CREATE table "+arr[4]+".table_name (\n\tcolumn1 datatype,\n\tcolumn2 datatype,\n\tcolumn3 datatype,\n\t....\n);";
 
-  /*var counter=0;
+  var counter=0;
 
   function createTemplate(counter){
     var id=counter;
     var htmlTemplate=
     `${id}.<tr id=${id}>
         <td>Column name: </td>
-        <td><input type="text" name="column_name" placeholder="Enter column name"></td>
-        <td><select name="column_type">
+        <td><input type="text" id=cn${id} name="column_name" placeholder="Enter column name"></td>
+        <td><select id=dt${id} name="column_type">
           <option value="" disabled selected>Select column type</option>
           <option value="char">Character</option>
           <option value="boolean">Boolean</option>
           <option value="integer">Integer</option>
           <option value="decimal">Decimal</option>
-          <option value="varchar">String</<option>
+          <option value="varchar">Character Varying</<option>
+          <option value="text">Text</<option>
           <option value="date">Date</<option></select>
         </td>
         <td><select id=cc${id} name="column_contraint">
@@ -57,17 +59,24 @@ window.onload = function(){
     }
   }
 
+  tablename.oninput = function() {
+    modify_query(tablename.value, counter);
+  }
+
+
+
   add_column.onclick = function(){
     counter+=1;
     column = createTemplate(counter);
     var container = document.createElement("div");
     container.innerHTML = column;
-    document.getElementById("column_details").appendChild(container);
-    document.getElementById("cc"+counter).onchange = function(){constraint_check(this,counter)};
-    document.getElementById("table"+counter).onchange = function(){ foreign_key_attribute(this,counter)};
+    
     }
 
     function constraint_check(that,counter) {
+      document.getElementById("check"+counter).style.display = "none";
+      document.getElementById("attribute"+counter).style.display = "none";
+      document.getElementById("table"+counter).style.display = "none";
       if (that.value == "FOREIGN KEY") {
         var table_option = document.getElementById("table"+counter);
         table_option.style.display = "block";
@@ -109,7 +118,7 @@ window.onload = function(){
         }
       }
     }
-*/
+
   create_table.onclick = function(){
     var request;
     var sqlquery = document.getElementById('create_table_query').value;
