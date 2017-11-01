@@ -70,7 +70,18 @@ window.onload = function(){
     column = createTemplate(counter);
     var container = document.createElement("div");
     container.innerHTML = column;
-    
+    document.getElementById("column_details").appendChild(container);
+    document.getElementById("table"+counter).onchange = function(){ foreign_key_attribute(this,counter)};
+    document.getElementById("cn"+counter).onchange = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("dt"+counter).onchange = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("cc"+counter).onchange = function(){
+      constraint_check(this,counter);
+      modify_query(tablename.value,counter);}
+    document.getElementById("check"+counter).onchange = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("table"+counter).onchange = function(){
+      foreign_key_attribute(this,counter);
+      modify_query(tablename.value,counter);}
+    document.getElementById("attribute"+counter).onchange = function(){ modify_query(tablename.value,counter)};
     }
 
     function constraint_check(that,counter) {
