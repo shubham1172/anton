@@ -19,7 +19,7 @@
 				<tr><td><input type="checkbox" name="schema" value= "{{schema[0]}}"><a href = "{{ url_for('views.schema', schema = schema[0])}}">{{ schema[0] }}</a></input></td>
 				<td style="color:grey;font-size:12px;"><a href="{{ url_for('views.rename_schema', schema = schema[0])}}">Rename</a></td></tr>
 				{% endfor %}
-				<tr><td id="message" style="color:red;font-size:12px;"></td></tr>
+				<tr><td id="message" style="color:blue;font-size:12px;"></td></tr>
 		</table>
 </div>
 
