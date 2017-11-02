@@ -91,17 +91,17 @@ window.onload = function(){
     var container = document.createElement("div");
     container.innerHTML = column;
     document.getElementById("column_details").appendChild(container);
-    document.getElementById("table"+counter).onchange = function(){ foreign_key_attribute(this,counter)};
-    document.getElementById("cn"+counter).onchange = function(){ modify_query(tablename.value,counter)};
-    document.getElementById("dt"+counter).onchange = function(){ modify_query(tablename.value,counter)};
-    document.getElementById("cc"+counter).onchange = function(){
+    document.getElementById("table"+counter).oninput = function(){ foreign_key_attribute(this,counter)};
+    document.getElementById("cn"+counter).oninput = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("dt"+counter).oninput = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("cc"+counter).oninput = function(){
       constraint_check(this,counter);
       modify_query(tablename.value,counter);}
-    document.getElementById("check"+counter).onchange = function(){ modify_query(tablename.value,counter)};
-    document.getElementById("table"+counter).onchange = function(){
+    document.getElementById("check"+counter).oninput = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("table"+counter).oninput = function(){
       foreign_key_attribute(this,counter);
       modify_query(tablename.value,counter);}
-    document.getElementById("attribute"+counter).onchange = function(){ modify_query(tablename.value,counter)};
+    document.getElementById("attribute"+counter).oninput = function(){ modify_query(tablename.value,counter)};
     }
 
 
