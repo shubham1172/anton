@@ -31,6 +31,7 @@ window.onload = function () {
         read_data.onload = function(file_data) {
         var data = JSON.parse(file_data.target.result);
         formatted_data = JSON.stringify(data, null, 2);
+        console.log(formatted_data);
         }
         read_data.readAsText(files.item(0));
         import_table(formatted_data);

@@ -1,7 +1,7 @@
 function exportToFile(data,table) {
   var textToSave = data;
-  var filename = table;
-  var blob = new Blob([textToSave], {type: "text/json"});
+  var filename = table+".json";
+  var blob = new Blob([textToSave], {type: "text/plain"});
   saveAs(blob, filename);
 }
 
