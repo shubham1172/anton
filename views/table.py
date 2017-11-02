@@ -25,6 +25,10 @@ def table(schema,table):
 def create_table(schema):
     return render_template('table_create.html', schema=schema, template=getConnection(session["user-token"])[1])
 
+@views.route('/model/<schema>/import-table')
+def import_table(schema):
+    return render_template('table_import.html', schema=schema, template=getConnection(session["user-token"])[1])
+
 @views.route('/model/<schema>/<table>/rename-table')
 def rename_table(schema,table):
     return render_template('table_rename.html', schema=schema, table=table, template=getConnection(session["user-token"])[1])
