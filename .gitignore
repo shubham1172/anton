@@ -1,0 +1,6 @@
+*/__pycache__
+.idea/
+__pycache__/
+api/authorization/__pycache__/
+api/schema_features/__pycache__/
+api/table_features/__pycache__/
