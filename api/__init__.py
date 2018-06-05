@@ -1,5 +1,5 @@
-#API blueprint init file
-from flask import Blueprint, current_app, request, json, session
+# API blueprint init file
+from flask import Blueprint
 
 api = Blueprint('api', __name__)
 """
@@ -8,12 +8,13 @@ All the methods only support POSTed JSON
 Don't forget to put
     'content-type as application/JSON in thy requests!'
 """
-#These endpoints donot require auth
+# These endpoints donot require auth
 allowed = ['api.login', 'api.logout']
-#These endpoints donot require json
+# These endpoints donot require json
 no_json = ['api.logout', 'api.get_schemas']
 
-#Connection data
+
+# Connection data
 @api.before_request
 def before_request():
     if request.endpoint not in allowed and "user-token" not in session:
@@ -21,7 +22,8 @@ def before_request():
     if request.endpoint not in no_json and request.json is None:
         return sender.BadRequest("JSON expected")
 
-#Import routes
+
+# Import routes
 from .sender import *
 from .table_features import *
 from .schema_features import *

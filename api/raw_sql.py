@@ -2,6 +2,7 @@ from flask import request, session
 from connections import getConnection
 from api import api, sender
 
+
 """
 Runs raw SQL
 requires:

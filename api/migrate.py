@@ -1,7 +1,7 @@
-from flask import request, session, send_from_directory, jsonify
-from connections import getConnection, getRandomToken
+from flask import request, session, jsonify
+from connections import getConnection
 from api import api, sender
-import json
+
 
 """
 EXPORT data
@@ -19,12 +19,12 @@ def export_table():
     if not schema_name:
         schema_name = "public"
     curr = getConnection(session["user-token"])[0].cursor()
-    #get columns info
+    # get columns info
     col_query = """SELECT *
                 FROM information_schema.columns
                 WHERE table_name = '{}'
                 AND table_schema = '{}';""".format(table_name, schema_name)
-    #get columns data
+    # get columns data
     data_query = """SELECT *
                 FROM {}.\"{}\"""".format(schema_name, table_name)
     try:
@@ -41,6 +41,7 @@ def export_table():
         return jsonify(data)
     except Exception as e:
         return sender.Error(str(e))
+
 
 """
 IMPORT data
@@ -64,26 +65,25 @@ def import_table():
         return sender.BadRequest('Export data malformed')
     try:
         conn, connstring = getConnection(session["user-token"])
-        username = connstring["username"]
         curr = conn.cursor()
         check_query = """SELECT * FROM information_schema.tables WHERE
                     table_name='{}'
                     AND table_schema='{}'""".format(table_name, schema_name)
         curr.execute(check_query)
-        if(len(curr.fetchall())!=0):
+        if len(curr.fetchall()) != 0:
             return sender.Error("Table already exists. Remove it to import")
-        #create table
+        # create table
         create_query = """CREATE TABLE {}.\"{}\"(""".format(schema_name, table_name)
         for items in columns:
-            create_query=create_query+items[0]+" "+items[4]
-            if items[3]=="NO":
-                create_query=create_query+" NOT NULL"
+            create_query = create_query+items[0]+" "+items[4]
+            if items[3] == "NO":
+                create_query = create_query+" NOT NULL"
             if items[2]:
-                create_query=create_query+" DEFAULT "+items[2]
-            create_query=create_query+","
-        create_query=create_query[:-1]+");"
+                create_query = create_query+" DEFAULT "+items[2]
+            create_query = create_query+","
+        create_query = create_query[:-1]+");"
         curr.execute(create_query)
-        #insert data
+        # insert data
         insert_query = """INSERT INTO {}.\"{}\" VALUES""".format(schema_name, table_name)
         insert_query = insert_query + "(%s"+", %s"*(len(values[0])-1)+")"
         curr.executemany(insert_query, values)

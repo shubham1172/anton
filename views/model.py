@@ -1,8 +1,9 @@
-from flask import request, render_template, abort, session
+from flask import render_template, abort, session
 from connections import getConnection
 from . import views
 
-#Get all schemas in the database
+
+# Get all schemas in the database
 @views.route('/model')
 def model():
     conn, connstring = getConnection(session["user-token"])

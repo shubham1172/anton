@@ -3,6 +3,7 @@ from flask import request, session
 from api import api, sender
 from connections import setConnection, getConnection
 
+
 @api.route('/login', methods=['POST'])
 def login():
     if session.get("user-token", None):
@@ -21,6 +22,6 @@ def login():
         return sender.Forbidden("Recheck credentials")
     conndict = request.json
     conndict.pop("password")
-    #Add object to session
+    # Add object to session
     session["user-token"] = setConnection([conn, conndict])
     return sender.OK("Logged in", session["user-token"])

@@ -1,6 +1,7 @@
-from flask import request, session
+from flask import session
 from api import api, sender
 from connections import getConnection
+
 
 """
 Get schemas in database

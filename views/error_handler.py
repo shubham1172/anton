@@ -1,16 +1,19 @@
-from flask import jsonify, request
+from flask import jsonify
 from . import views
 
-#Handle errors for Flask
+# Handle errors for Flask
+
 
 @views.errorhandler(403)
 def forbidden(e):
-    return jsonify(code = 403, message="forbidden")
+    return jsonify(code=403, message="forbidden")
+
 
 @views.errorhandler(405)
 def not_allowed(e):
-    return jsonify(code = 405, message="not allowed")
+    return jsonify(code=405, message="not allowed")
+
 
 @views.errorhandler(500)
 def server_error(e):
-    return jsonify(code = 500, message="server error")
+    return jsonify(code=500, message="server error")

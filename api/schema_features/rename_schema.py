@@ -2,6 +2,7 @@ from flask import request, session
 from api import api, sender
 from connections import getConnection
 
+
 """
 Renames a schema
 Requires:

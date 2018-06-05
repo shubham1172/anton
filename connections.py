@@ -1,7 +1,7 @@
 from random import choice
 from string import ascii_letters
 
-#Dictionary maintaining record
+# Dictionary maintaining record
 logged_in = {}
 
 """
@@ -14,11 +14,13 @@ def setConnection(connection):
     logged_in[userToken] = connection
     return userToken
 
+
 """
 Get connection obj for current user
 """
 def getConnection(userToken):
     return logged_in[userToken]
+
 
 """
 Close current connection obj
@@ -26,6 +28,7 @@ Close current connection obj
 def closeConnection(userToken):
     logged_in[userToken][0].close()
     logged_in.pop(userToken)
+
 
 """
 Create a random token
