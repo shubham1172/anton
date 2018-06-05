@@ -1,4 +1,4 @@
-from flask import request, render_template, abort, session
+from flask import render_template, abort, session
 from . import views
 from connections import getConnection
 
