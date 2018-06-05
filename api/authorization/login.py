@@ -13,6 +13,7 @@ def login():
     database = request.json.get("database", None)
     if database == "":
         database = "postgres"
+        request.json["database"] = database
     host = request.json.get("host", None)
     port = request.json.get("port", None)
     if not (username and password and host and port):
