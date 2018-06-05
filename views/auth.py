@@ -17,7 +17,7 @@ def login():
     url = request.url_root + url_for('api.login')[1:]
     try:
         data = json.loads(json.dumps(request.form))
-        r = requests.post(url, json = data)
+        r = requests.post(url, json=data)
         res = r.json()
         if res["code"] == 200:
             # Set session for this blueprint

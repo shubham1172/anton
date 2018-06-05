@@ -17,7 +17,7 @@ def schema(schema):
         abort(500)
     message = ""
     rows = curr.fetchall()
-    if len(rows)==0:
+    if len(rows) == 0:
         message = "No tables found. Schema name invalid/Schema is empty"
     return render_template('schema.html', message=message,
                            schema=schema, template=connstring, tables=rows)

@@ -4,7 +4,7 @@ from connections import getConnection
 
 
 @views.route('/model/<schema>/<table>')
-def table(schema,table):
+def table(schema, table):
     conn, connstring = getConnection(session["user-token"])
     curr = conn.cursor()
     query = """SELECT column_name, data_type
