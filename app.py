@@ -1,5 +1,5 @@
 # Main app file
-from flask import Flask, session
+from flask import Flask, render_template
 from views import *
 from api import *
 
@@ -20,7 +20,7 @@ def site_map():
     routes = []
     for rule in app.url_map.iter_rules():
         routes.append(rule)
-    return str(routes)
+    return render_template('sitemap.html', routes=routes)
 
 
 # Start app

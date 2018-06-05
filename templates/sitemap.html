@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Site map - Anton</title>
+    <link href= "{{ url_for('static', filename='css/sitemap.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <h1> Site map </h1>
+    <div id="container">
+        <table cellspacing="5px">
+            {% for route in routes %}
+            <tr>
+                <td> {{ route }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
