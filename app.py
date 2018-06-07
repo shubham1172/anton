@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 from views import *
 from api import *
+import argparse
 
 app = Flask(__name__)
 app.config.from_object('config')    # load config
@@ -25,7 +26,10 @@ def site_map():
 
 # Start app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, threaded=True, debug=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", help="port number", nargs='?', const=80, type=int)
+    args = parser.parse_args()
+    app.run(host='0.0.0.0', port=args.port, threaded=True, debug=True)
 
 # note: added threaded as true to support multiple requests in the debug server
 # used while calling api functions from view requests
