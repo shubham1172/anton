@@ -13,7 +13,7 @@ def drop_schema():
     name = request.json.get('schema', None)
     if not name:
         return sender.BadRequest("missing field: schema")
-    not_allowed = ["pg_toast", "pg_catalog","public","information_schema"]
+    not_allowed = ["pg_toast", "pg_catalog", "public", "information_schema"]
     if name in not_allowed:
         return sender.Forbidden("Not allowed")
     curr = getConnection(session["user-token"])[0].cursor()

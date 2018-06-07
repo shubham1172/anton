@@ -31,10 +31,10 @@ def export_table():
         curr.execute(col_query)
         col_rows = curr.fetchall()
         data = {}
-        if len(col_rows)==0:
-            data["message"]="Table does not exists"
+        if len(col_rows) == 0:
+            data["message"] = "Table does not exists"
         else:
-            data["columns"]= [rows[3:] for rows in col_rows]
+            data["columns"] = [rows[3:] for rows in col_rows]
         curr.execute(data_query)
         val_rows = curr.fetchall()
         data["values"] = val_rows
