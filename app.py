@@ -27,8 +27,9 @@ def site_map():
 # Start app
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", help="port number", nargs='?', const=80, type=int)
+    parser.add_argument("-p", "--port", help="port number", nargs='?', default=80, type=int)
     args = parser.parse_args()
+    print(args.port)
     app.run(host='0.0.0.0', port=args.port, threaded=True, debug=True)
 
 # note: added threaded as true to support multiple requests in the debug server
